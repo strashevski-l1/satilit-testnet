@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Онлайн казино Сателлит - современная платформа для азартных игр с лицензированными слотами, бонусами и безопасной игрой. Академический проект по теории игр.">
+    <meta name="keywords" content="онлайн казино, слоты, азартные игры, бонусы, лицензия, безопасная игра, теория игр">
+    <meta name="author" content="Академический проект">
+    <title>Сателлит Казино - Современная платформа азартных игр</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>САТЕЛЛИТ</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Главная</a></li>
+                    <li><a href="#games" class="nav-link">Игры</a></li>
+                    <li><a href="#bonuses" class="nav-link">Бонусы</a></li>
+                    <li><a href="#about" class="nav-link">О нас</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Войти</button>
+                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Добро пожаловать в мир азартных игр</h1>
+                <p class="hero-subtitle">Современная платформа онлайн казино с лицензированными играми и честной игрой</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" id="startPlayingBtn">Начать играть</button>
+                    <button class="btn btn-outline btn-large" id="learnMoreBtn">Узнать больше</button>
+                </div>
+            </div>
+            <div class="hero-bg">
+                <div class="floating-card card-1"></div>
+                <div class="floating-card card-2"></div>
+                <div class="floating-card card-3"></div>
+            </div>
+        </section>
+
+        <section class="advantages">
+            <div class="container">
+                <h2 class="section-title">Наши преимущества</h2>
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🛡️</div>
+                        <h3>Безопасность</h3>
+                        <p>Лицензированная платформа с шифрованием данных и защитой средств игроков</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">⚡</div>
+                        <h3>Быстрые выплаты</h3>
+                        <p>Мгновенные депозиты и быстрые выводы средств на все популярные платежные системы</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🎯</div>
+                        <h3>Честная игра</h3>
+                        <p>Генератор случайных чисел сертифицирован международными организациями</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🎁</div>
+                        <h3>Щедрые бонусы</h3>
+                        <p>Приветственные бонусы, акции и программа лояльности для постоянных игроков</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="games" class="games">
+            <div class="container">
+                <h2 class="section-title">Популярные игры</h2>
+                <div class="games-grid">
+                    <div class="slot-card" data-slot="1">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 1</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Космические приключения</h4>
+                            <p>RTP: 96.5%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="2">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 2</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Сокровища пиратов</h4>
+                            <p>RTP: 95.8%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="3">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 3</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Фруктовый взрыв</h4>
+                            <p>RTP: 96.2%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="4">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 4</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Египетские тайны</h4>
+                            <p>RTP: 97.1%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="5">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 5</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Дикий запад</h4>
+                            <p>RTP: 96.0%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="6">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 6</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Алмазная лихорадка</h4>
+                            <p>RTP: 95.9%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="7">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 7</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Магические кристаллы</h4>
+                            <p>RTP: 96.7%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="8">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 8</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Подводный мир</h4>
+                            <p>RTP: 95.5%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="9">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 9</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Огненные драконы</h4>
+                            <p>RTP: 96.8%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="10">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 10</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Ночная жизнь</h4>
+                            <p>RTP: 96.3%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="11">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 11</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Древние боги</h4>
+                            <p>RTP: 97.2%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="12">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 12</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Джекпот удача</h4>
+                            <p>RTP: 95.7%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bonuses" class="bonuses">
+            <div class="container">
+                <h2 class="section-title">Бонусы и акции</h2>
+                <div class="bonuses-grid">
+                    <div class="bonus-card featured">
+                        <div class="bonus-badge">Популярное</div>
+                        <h3>Приветственный бонус</h3>
+                        <div class="bonus-amount">200%</div>
+                        <p>до 50 000 рублей + 100 фриспинов</p>
+                        <ul class="bonus-features">
+                            <li>✓ Бонус на первый депозит</li>
+                            <li>✓ Фриспины на популярные слоты</li>
+                            <li>✓ Вейджер x35</li>
+                        </ul>
+                        <button class="btn btn-primary">Получить бонус</button>
+                    </div>
+                    <div class="bonus-card">
+                        <h3>Еженедельный кэшбэк</h3>
+                        <div class="bonus-amount">15%</div>
+                        <p>возврат проигранных средств</p>
+                        <ul class="bonus-features">
+                            <li>✓ Каждый понедельник</li>
+                            <li>✓ Без отыгрыша</li>
+                            <li>✓ Автоматическое начисление</li>
+                        </ul>
+                        <button class="btn btn-outline">Узнать больше</button>
+                    </div>
+                    <div class="bonus-card">
+                        <h3>VIP программа</h3>
+                        <div class="bonus-amount">Эксклюзив</div>
+                        <p>для постоянных игроков</p>
+                        <ul class="bonus-features">
+                            <li>✓ Персональный менеджер</li>
+                            <li>✓ Повышенные лимиты</li>
+                            <li>✓ Эксклюзивные бонусы</li>
+                        </ul>
+                        <button class="btn btn-outline">Присоединиться</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="security">
+            <div class="container">
+                <h2 class="section-title">Безопасность и лицензирование</h2>
+                <div class="security-grid">
+                    <div class="security-card">
+                        <h3>🏛️ Лицензия</h3>
+                        <p>Лицензия выдана Кюрасао Gaming Authority (№ 365/JAZ). Деятельность казино регулируется международным законодательством.</p>
+                    </div>
+                    <div class="security-card">
+                        <h3>🔒 Шифрование</h3>
+                        <p>Все данные защищены 256-битным SSL шифрованием. Персональная информация и финансовые операции полностью безопасны.</p>
+                    </div>
+                    <div class="security-card">
+                        <h3>🎲 Честная игра</h3>
+                        <p>Генератор случайных чисел сертифицирован iTech Labs. Результаты игр невозможно предсказать или изменить.</p>
+                    </div>
+                    <div class="security-card">
+                        <h3>💳 Безопасные платежи</h3>
+                        <p>Интеграция с ведущими платежными системами. Средства игроков хранятся на отдельных счетах.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="responsible-gaming">
+            <div class="container">
+                <h2 class="section-title">Ответственная игра</h2>
+                <div class="responsible-content">
+                    <p class="responsible-text">
+                        Мы призываем к ответственному подходу к азартным играм. Игра должна оставаться развлечением, 
+                        а не способом решения финансовых проблем. Устанавливайте лимиты времени и денежных средств.
+                    </p>
+                    <div class="responsible-tools">
+                        <div class="tool">
+                            <h4>Лимиты депозитов</h4>
+                            <p>Установите дневные, недельные или месячные лимиты</p>
+                        </div>
+                        <div class="tool">
+                            <h4>Тайм-аут</h4>
+                            <p>Временная приостановка игры на выбранный период</p>
+                        </div>
+                        <div class="tool">
+                            <h4>Самоисключение</h4>
+                            <p>Полная блокировка аккаунта на длительный срок</p>
+                        </div>
+                    </div>
+                    <p class="help-text">
+                        Если вы чувствуете, что игра вышла из-под контроля, обратитесь за помощью: 
+                        <a href="tel:8-800-200-0-200">8-800-200-0-200</a> (анонимная горячая линия)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <div class="container">
+                <h2 class="section-title">Часто задаваемые вопросы</h2>
+                <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-question" itemprop="name">
+                            <h3>Как зарегистрироваться в казино?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Для регистрации нажмите кнопку "Регистрация" в правом верхнем углу сайта. Заполните форму с основными данными: email, пароль, имя. Подтвердите email и аккаунт будет активирован.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-question" itemprop="name">
+                            <h3>Какие методы пополнения и вывода доступны?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Мы поддерживаем банковские карты Visa/MasterCard, электронные кошельки (Qiwi, WebMoney, ЯндексДеньги), банковские переводы и криптовалюты. Минимальный депозит - 500 рублей, вывод - от 1000 рублей.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-question" itemprop="name">
+                            <h3>Как работает приветственный бонус?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Приветственный бонус 200% начисляется на первый депозит. Максимальная сумма бонуса - 50 000 рублей + 100 фриспинов. Вейджер бонуса составляет x35, срок отыгрыша - 30 дней.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-question" itemprop="name">
+                            <h3>Как быстро обрабатываются выводы средств?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Электронные кошельки: до 2 часов. Банковские карты: 1-3 рабочих дня. Банковские переводы: 3-5 рабочих дней. Криптовалюты: до 1 часа. Первый вывод может занять до 24 часов для верификации.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <div class="faq-question" itemprop="name">
+                            <h3>Есть ли мобильная версия казино?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Да, наш сайт полностью адаптирован для мобильных устройств. Все функции доступны в браузере смартфона или планшета. Отдельное мобильное приложение планируется к выпуску в 2024 году.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacts" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>САТЕЛЛИТ</h3>
+                    <p>Современное онлайн казино с честной игрой и быстрыми выплатами. Лицензия Кюрасао №365/JAZ.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Telegram">📱</a>
+                        <a href="#" aria-label="VKontakte">🌐</a>
+                        <a href="#" aria-label="Email">📧</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Игры</h4>
+                    <ul>
+                        <li><a href="#games">Слоты</a></li>
+                        <li><a href="#games">Рулетка</a></li>
+                        <li><a href="#games">Блэкджек</a></li>
+                        <li><a href="#games">Live Casino</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#bonuses">Бонусы</a></li>
+                        <li><a href="#">Правила</a></li>
+                        <li><a href="#">Конфиденциальность</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li>📧 support@satellite-casino.com</li>
+                        <li>📞 +7 (800) 123-45-67</li>
+                        <li>💬 Онлайн чат: 24/7</li>
+                        <li>🕐 Поддержка: круглосуточно</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2024 Сателлит Казино. Все права защищены.</p>
+                    <p class="academic-notice">Данный сайт создан в академических целях для демонстрации современных веб-технологий и изучения теории игр.</p>
+                </div>
+                <div class="footer-age">
+                    <span class="age-restriction">18+</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Вход в аккаунт</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Войти</button>
+                <p class="form-text">
+                    Нет аккаунта? <a href="#" id="switchToRegister">Зарегистрироваться</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Регистрация</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Подтвердите пароль" required>
+                </div>
+                <div class="form-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Я согласен с правилами и условиями</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Зарегистрироваться</button>
+                <p class="form-text">
+                    Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- <script src="script.js"></script>-->
+</body>
+</html>
