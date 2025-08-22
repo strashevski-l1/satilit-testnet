@@ -1,16 +1,99 @@
 class PasswordProtection {
   constructor() {
+    this.sessionId = this.generateSessionId();
+    this.initProtection();
     this.checkAuthStatus();
     this.createPasswordForm();
+    this.startSecurityChecks();
+  }
+
+  initProtection() {
+    // Отключаем контекстное меню
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    
+    // Блокируем горячие клавиши разработчика
+    document.addEventListener('keydown', e => {
+      if (e.key === 'F12' || 
+          (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+          (e.ctrlKey && e.key === 'U')) {
+        e.preventDefault();
+      }
+    });
+
+    // Скрываем содержимое при попытке выделения
+    document.addEventListener('selectstart', e => {
+      if (!document.body.classList.contains('auth-verified')) {
+        e.preventDefault();
+      }
+    });
+
+    // Обнаружение DevTools
+    let devtools = {open: false, orientation: null};
+    const threshold = 160;
+    setInterval(() => {
+      if (window.outerHeight - window.innerHeight > threshold || 
+          window.outerWidth - window.innerWidth > threshold) {
+        if (!devtools.open && !document.body.classList.contains('auth-verified')) {
+          document.body.innerHTML = '<div style="background:#000;color:#777;font-family:monospace;padding:20px;text-align:center;">Access Denied</div>';
+        }
+        devtools.open = true;
+      } else {
+        devtools.open = false;
+      }
+    }, 500);
+  }
+
+  generateSessionId() {
+    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+  }
+
+  startSecurityChecks() {
+    // Проверяем валидность токена каждые 30 секунд
+    setInterval(() => {
+      this.validateToken();
+    }, 30000);
+
+    // Проверяем целостность DOM
+    setInterval(() => {
+      if (document.body.classList.contains('auth-verified')) {
+        const overlay = document.getElementById('passwordOverlay');
+        if (!overlay && !this.isAuthenticated()) {
+          location.reload();
+        }
+      }
+    }, 5000);
+  }
+
+  validateToken() {
+    const token = localStorage.getItem('authToken');
+    const sessionId = localStorage.getItem('sessionId');
+    
+    if (token === 'access_granted' && sessionId === this.sessionId) {
+      return true;
+    } else {
+      this.logout();
+      return false;
+    }
+  }
+
+  isAuthenticated() {
+    return localStorage.getItem('authToken') === 'access_granted' && 
+           localStorage.getItem('sessionId') === this.sessionId;
   }
 
   checkAuthStatus() {
-    const token = localStorage.getItem('authToken');
-    if (token === 'access_granted') {
+    if (this.isAuthenticated()) {
       this.showMainContent();
     } else {
       this.showPasswordForm();
     }
+  }
+
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('sessionId');
+    document.body.classList.remove('auth-verified');
+    location.reload();
   }
 
   createPasswordForm() {
@@ -146,6 +229,7 @@ class PasswordProtection {
 
       if (data.success) {
         localStorage.setItem('authToken', data.token);
+        localStorage.setItem('sessionId', this.sessionId);
         this.showMainContent();
       } else {
         errorDiv.textContent = data.error || 'Неверный пароль';
@@ -168,6 +252,7 @@ class PasswordProtection {
 
   showMainContent() {
     document.body.style.overflow = '';
+    document.body.classList.add('auth-verified');
     const overlay = document.getElementById('passwordOverlay');
     if (overlay) {
       overlay.remove();
