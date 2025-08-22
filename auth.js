@@ -417,5 +417,203 @@ class PasswordProtection {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  new PasswordProtection();
+  try {
+    new PasswordProtection();
+  } catch (error) {
+    console.error('Ошибка инициализации:', error);
+    // Показываем форму напрямую если есть ошибка
+    document.getElementById('app-container').innerHTML = `
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: 'Courier New', monospace;
+      ">
+        <div style="
+          background: #000000;
+          border: 1px solid #777;
+          padding: 40px;
+          text-align: left;
+          max-width: 400px;
+          width: 90%;
+        ">
+          <h2 style="
+            color: #fff;
+            margin: 0 0 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: normal;
+          ">ACCESS RESTRICTED</h2>
+          <p style="
+            color: #777;
+            margin: 0 0 30px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+          ">Enter password to proceed</p>
+          <form onsubmit="handleAuth(event)">
+            <div style="margin-bottom: 20px;">
+              <label style="
+                color: #777;
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                display: block;
+                margin-bottom: 5px;
+              ">PASSWORD:</label>
+              <input 
+                type="password" 
+                id="simplePasswordInput"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border: 1px solid #777;
+                  background: #000000;
+                  color: #fff;
+                  font-size: 14px;
+                  box-sizing: border-box;
+                  font-family: 'Courier New', monospace;
+                "
+                required
+              />
+            </div>
+            <button 
+              type="submit"
+              style="
+                padding: 10px 20px;
+                background: #000000;
+                color: #fff;
+                border: 1px solid #777;
+                font-size: 14px;
+                cursor: pointer;
+                font-family: 'Courier New', monospace;
+              "
+            >ENTER</button>
+          </form>
+        </div>
+        
+        <div style="
+          position: absolute;
+          bottom: 20px;
+          left: 20px;
+          right: 20px;
+          border-top: 1px solid #777;
+          padding-top: 20px;
+          text-align: center;
+        ">
+          <div style="
+            color: #777;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin-bottom: 10px;
+          ">Buy access for 0.05 ETH</div>
+          <div style="
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            word-break: break-all;
+          ">0xd19a8132c4ab8a9fde0acffa786c3f8b01738ad7</div>
+        </div>
+      </div>
+    `;
+  }
 });
+
+// Простая функция аутентификации
+async function handleAuth(event) {
+  event.preventDefault();
+  const password = document.getElementById('simplePasswordInput').value;
+  
+  try {
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      localStorage.setItem('authToken', data.token);
+      loadSiteContent();
+    } else {
+      alert('Неверный пароль');
+    }
+  } catch (error) {
+    alert('Ошибка подключения к серверу');
+  }
+}
+
+// Загрузка контента сайта
+function loadSiteContent() {
+  const siteContent = \`
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>САТЕЛЛИТ</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Главная</a></li>
+                    <li><a href="#games" class="nav-link">Игры</a></li>
+                    <li><a href="#bonuses" class="nav-link">Бонусы</a></li>
+                    <li><a href="#about" class="nav-link">О нас</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Войти</button>
+                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Добро пожаловать в мир азартных игр</h1>
+                <p class="hero-subtitle">Современная платформа онлайн казино с лицензированными играми и честной игрой</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large">Начать играть</button>
+                    <button class="btn btn-outline btn-large">Узнать больше</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="advantages">
+            <div class="container">
+                <h2 class="section-title">Наши преимущества</h2>
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🛡️</div>
+                        <h3>Безопасность</h3>
+                        <p>Лицензированная платформа с шифрованием данных</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">⚡</div>
+                        <h3>Быстрые выплаты</h3>
+                        <p>Мгновенные депозиты и быстрые выводы средств</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Сателлит Казино. Все права защищены.</p>
+        </div>
+    </footer>
+  \`;
+  
+  document.getElementById('app-container').innerHTML = siteContent;
+  document.title = 'Сателлит Казино - Современная платформа азартных игр';
+}
