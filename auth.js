@@ -190,168 +190,267 @@ function showSiteContent() {
     </header>
 
     <main>
-        <section class="banner-grid">
+        <section class="banner-section">
             <div class="banner-container">
-                <div class="banner-item casino-banner">
-                    <div class="banner-content">
-                        <div class="banner-icon">
-                            <img src="assets/bg-banner-desktop-Dl6I0ttm.webp" alt="Casino" class="banner-image">
-                        </div>
-                        <div class="banner-text">
-                            <h3 class="banner-title">CASINO</h3>
-                            <p class="banner-description">We offer a comprehensive range of exciting casino games, including classic slots, video slots, table games, and live dealer options featuring real dealers and authentic casino atmosphere.</p>
-                        </div>
-                        <button class="banner-btn">Play now</button>
+                <!-- Большой баннер сверху -->
+                <div class="main-banner">
+                    <div class="main-banner-bg"></div>
+                    <div class="main-banner-content">
+                        <h1 class="main-banner-title">ДОБРО ПОЖАЛОВАТЬ В МИР АЗАРТНЫХ ИГР</h1>
+                        <p class="main-banner-subtitle">Современная платформа онлайн казино с лицензированными играми и честной игрой</p>
+                    </div>
+                    <!-- Персонажи как на скриншоте -->
+                    <div class="banner-characters">
+                        <img src="assets/bg-banner-desktop-Dl6I0ttm.webp" alt="Characters" class="characters-image">
                     </div>
                 </div>
                 
-                <div class="banner-item sport-banner">
-                    <div class="banner-content">
-                        <div class="banner-icon">
-                            <img src="assets/sport-banner-DB5L_KsG.webp" alt="Sport Betting" class="banner-image">
+                <!-- Два маленьких баннера снизу -->
+                <div class="small-banners">
+                    <div class="small-banner casino-small">
+                        <div class="small-banner-bg"></div>
+                        <div class="small-banner-icon">🎰</div>
+                        <div class="small-banner-content">
+                            <h3 class="small-banner-title">CASINO</h3>
+                            <p class="small-banner-description">We offer a comprehensive range of exciting casino games, including classic slots, video slots, table games, and live dealer options featuring real dealers.</p>
+                            <button class="small-banner-btn">Play now</button>
                         </div>
-                        <div class="banner-text">
-                            <h3 class="banner-title">SPORT BETTING</h3>
-                            <p class="banner-description">Here, you can bet on your favorite sports events from around the world. We offer extensive coverage, such as live bets and competitive odds.</p>
-                        </div>
-                        <button class="banner-btn">Place bets</button>
                     </div>
-                </div>
-                
-                <div class="banner-item lobby-banner">
-                    <div class="banner-content">
-                        <div class="banner-icon">
-                            <img src="assets/lobby-banner-CAFulc0X.webp" alt="Live Lobby" class="banner-image">
+                    
+                    <div class="small-banner sport-small">
+                        <div class="small-banner-bg"></div>
+                        <div class="small-banner-icon">⚽</div>
+                        <div class="small-banner-content">
+                            <h3 class="small-banner-title">SPORT BETTING</h3>
+                            <p class="small-banner-description">Here, you can bet on your favorite sports events from around the world. We offer extensive coverage, such as live bets and competitive odds.</p>
+                            <button class="small-banner-btn">Place bets</button>
                         </div>
-                        <div class="banner-text">
-                            <h3 class="banner-title">LIVE LOBBY</h3>
-                            <p class="banner-description">Experience the excitement of real-time gaming with professional dealers in our live casino lobby. Authentic atmosphere and interactive gameplay.</p>
-                        </div>
-                        <button class="banner-btn">Join lobby</button>
                     </div>
                 </div>
             </div>
         </section>
         
         <style>
-            .banner-grid {
-                padding: 60px 20px 40px;
+            .banner-section {
+                padding: 0;
                 background: var(--bg-dark);
                 min-height: 80vh;
-                display: flex;
-                align-items: center;
             }
             
             .banner-container {
                 max-width: 1200px;
                 margin: 0 auto;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-                gap: 30px;
-                width: 100%;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                height: 80vh;
             }
             
-            .banner-item {
-                background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(20,20,30,0.9) 100%);
+            /* Большой баннер */
+            .main-banner {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f1419 100%);
                 border-radius: 16px;
-                border: 1px solid rgba(255,255,255,0.1);
-                padding: 30px;
+                height: 60%;
                 position: relative;
                 overflow: hidden;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                min-height: 280px;
                 display: flex;
-                flex-direction: column;
+                align-items: center;
+                padding: 40px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             }
             
-            .banner-item:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-                border-color: rgba(255,255,255,0.2);
-            }
-            
-            .casino-banner {
-                background: linear-gradient(135deg, rgba(139,69,19,0.3) 0%, rgba(160,82,45,0.2) 100%);
-            }
-            
-            .sport-banner {
-                background: linear-gradient(135deg, rgba(25,25,112,0.3) 0%, rgba(72,61,139,0.2) 100%);
-            }
-            
-            .lobby-banner {
-                background: linear-gradient(135deg, rgba(75,0,130,0.3) 0%, rgba(138,43,226,0.2) 100%);
-            }
-            
-            .banner-content {
-                display: flex;
-                flex-direction: column;
+            .main-banner-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
                 height: 100%;
+                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat center;
+                background-size: cover;
+                opacity: 0.3;
+                z-index: 1;
+            }
+            
+            .main-banner-content {
                 position: relative;
+                z-index: 2;
+                max-width: 50%;
+                color: white;
+            }
+            
+            .main-banner-title {
+                font-size: 36px;
+                font-weight: 800;
+                color: #ffffff;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                line-height: 1.2;
+            }
+            
+            .main-banner-subtitle {
+                font-size: 16px;
+                color: #b0b0b0;
+                line-height: 1.6;
+                margin-bottom: 0;
+            }
+            
+            .banner-characters {
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 50%;
                 z-index: 2;
             }
             
-            .banner-image {
-                width: 80px;
-                height: 80px;
+            .characters-image {
+                width: 100%;
+                height: 100%;
                 object-fit: cover;
-                border-radius: 12px;
-                margin-bottom: 20px;
-                border: 2px solid rgba(255,255,255,0.1);
+                object-position: right center;
             }
             
-            .banner-title {
-                font-size: 24px;
+            /* Маленькие баннеры */
+            .small-banners {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                height: 35%;
+            }
+            
+            .small-banner {
+                border-radius: 16px;
+                position: relative;
+                overflow: hidden;
+                padding: 25px;
+                display: flex;
+                align-items: flex-start;
+                gap: 20px;
+                transition: transform 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            }
+            
+            .small-banner:hover {
+                transform: translateY(-3px);
+            }
+            
+            .casino-small {
+                background: linear-gradient(135deg, rgba(220,20,60,0.8) 0%, rgba(139,0,0,0.9) 100%);
+            }
+            
+            .casino-small .small-banner-bg {
+                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat left center;
+                background-size: cover;
+                opacity: 0.2;
+            }
+            
+            .sport-small {
+                background: linear-gradient(135deg, rgba(25,25,112,0.8) 0%, rgba(72,61,139,0.9) 100%);
+            }
+            
+            .sport-small .small-banner-bg {
+                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat right center;
+                background-size: cover;
+                opacity: 0.2;
+            }
+            
+            .small-banner-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+            
+            .small-banner-icon {
+                font-size: 32px;
+                z-index: 2;
+                position: relative;
+            }
+            
+            .small-banner-content {
+                flex: 1;
+                z-index: 2;
+                position: relative;
+            }
+            
+            .small-banner-title {
+                font-size: 18px;
                 font-weight: 700;
                 color: #ffffff;
-                margin-bottom: 15px;
+                margin-bottom: 10px;
                 text-transform: uppercase;
                 letter-spacing: 1px;
             }
             
-            .banner-description {
-                color: #b0b0b0;
-                font-size: 14px;
-                line-height: 1.6;
-                margin-bottom: 25px;
-                flex-grow: 1;
+            .small-banner-description {
+                font-size: 13px;
+                color: #e0e0e0;
+                line-height: 1.4;
+                margin-bottom: 15px;
             }
             
-            .banner-btn {
-                background: transparent;
+            .small-banner-btn {
+                background: rgba(255,255,255,0.2);
                 color: #ffffff;
-                border: 2px solid rgba(255,255,255,0.3);
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-size: 14px;
+                border: 1px solid rgba(255,255,255,0.3);
+                padding: 8px 16px;
+                border-radius: 6px;
+                font-size: 12px;
                 font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                align-self: flex-start;
             }
             
-            .banner-btn:hover {
+            .small-banner-btn:hover {
                 background: #ffffff;
                 color: #000000;
                 border-color: #ffffff;
-                transform: translateY(-2px);
             }
             
             @media (max-width: 768px) {
                 .banner-container {
+                    padding: 15px;
+                    height: auto;
+                    min-height: 80vh;
+                }
+                
+                .main-banner {
+                    height: 300px;
+                    padding: 30px 20px;
+                }
+                
+                .main-banner-content {
+                    max-width: 100%;
+                }
+                
+                .main-banner-title {
+                    font-size: 24px;
+                }
+                
+                .main-banner-subtitle {
+                    font-size: 14px;
+                }
+                
+                .banner-characters {
+                    opacity: 0.3;
+                }
+                
+                .small-banners {
                     grid-template-columns: 1fr;
-                    gap: 20px;
+                    gap: 15px;
                 }
                 
-                .banner-item {
-                    padding: 25px;
-                    min-height: 250px;
-                }
-                
-                .banner-grid {
-                    padding: 40px 15px 30px;
-                    min-height: auto;
+                .small-banner {
+                    padding: 20px;
+                    flex-direction: column;
+                    gap: 15px;
+                    text-align: center;
                 }
             }
         </style>
