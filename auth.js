@@ -190,21 +190,171 @@ function showSiteContent() {
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Добро пожаловать в мир азартных игр</h1>
-                <p class="hero-subtitle">Современная платформа онлайн казино с лицензированными играми и честной игрой</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary btn-large" id="startPlayingBtn">Начать играть</button>
-                    <button class="btn btn-outline btn-large" id="learnMoreBtn">Узнать больше</button>
+        <section class="banner-grid">
+            <div class="banner-container">
+                <div class="banner-item casino-banner">
+                    <div class="banner-content">
+                        <div class="banner-icon">
+                            <img src="assets/bg-banner-desktop-Dl6I0ttm.webp" alt="Casino" class="banner-image">
+                        </div>
+                        <div class="banner-text">
+                            <h3 class="banner-title">CASINO</h3>
+                            <p class="banner-description">We offer a comprehensive range of exciting casino games, including classic slots, video slots, table games, and live dealer options featuring real dealers and authentic casino atmosphere.</p>
+                        </div>
+                        <button class="banner-btn">Play now</button>
+                    </div>
+                </div>
+                
+                <div class="banner-item sport-banner">
+                    <div class="banner-content">
+                        <div class="banner-icon">
+                            <img src="assets/sport-banner-DB5L_KsG.webp" alt="Sport Betting" class="banner-image">
+                        </div>
+                        <div class="banner-text">
+                            <h3 class="banner-title">SPORT BETTING</h3>
+                            <p class="banner-description">Here, you can bet on your favorite sports events from around the world. We offer extensive coverage, such as live bets and competitive odds.</p>
+                        </div>
+                        <button class="banner-btn">Place bets</button>
+                    </div>
+                </div>
+                
+                <div class="banner-item lobby-banner">
+                    <div class="banner-content">
+                        <div class="banner-icon">
+                            <img src="assets/lobby-banner-CAFulc0X.webp" alt="Live Lobby" class="banner-image">
+                        </div>
+                        <div class="banner-text">
+                            <h3 class="banner-title">LIVE LOBBY</h3>
+                            <p class="banner-description">Experience the excitement of real-time gaming with professional dealers in our live casino lobby. Authentic atmosphere and interactive gameplay.</p>
+                        </div>
+                        <button class="banner-btn">Join lobby</button>
+                    </div>
                 </div>
             </div>
-            <div class="hero-bg">
-                <div class="floating-card card-1"></div>
-                <div class="floating-card card-2"></div>
-                <div class="floating-card card-3"></div>
-            </div>
         </section>
+        
+        <style>
+            .banner-grid {
+                padding: 60px 20px 40px;
+                background: var(--bg-dark);
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+            }
+            
+            .banner-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+                width: 100%;
+            }
+            
+            .banner-item {
+                background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(20,20,30,0.9) 100%);
+                border-radius: 16px;
+                border: 1px solid rgba(255,255,255,0.1);
+                padding: 30px;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                min-height: 280px;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .banner-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                border-color: rgba(255,255,255,0.2);
+            }
+            
+            .casino-banner {
+                background: linear-gradient(135deg, rgba(139,69,19,0.3) 0%, rgba(160,82,45,0.2) 100%);
+            }
+            
+            .sport-banner {
+                background: linear-gradient(135deg, rgba(25,25,112,0.3) 0%, rgba(72,61,139,0.2) 100%);
+            }
+            
+            .lobby-banner {
+                background: linear-gradient(135deg, rgba(75,0,130,0.3) 0%, rgba(138,43,226,0.2) 100%);
+            }
+            
+            .banner-content {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                position: relative;
+                z-index: 2;
+            }
+            
+            .banner-image {
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                border: 2px solid rgba(255,255,255,0.1);
+            }
+            
+            .banner-title {
+                font-size: 24px;
+                font-weight: 700;
+                color: #ffffff;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            
+            .banner-description {
+                color: #b0b0b0;
+                font-size: 14px;
+                line-height: 1.6;
+                margin-bottom: 25px;
+                flex-grow: 1;
+            }
+            
+            .banner-btn {
+                background: transparent;
+                color: #ffffff;
+                border: 2px solid rgba(255,255,255,0.3);
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                align-self: flex-start;
+            }
+            
+            .banner-btn:hover {
+                background: #ffffff;
+                color: #000000;
+                border-color: #ffffff;
+                transform: translateY(-2px);
+            }
+            
+            @media (max-width: 768px) {
+                .banner-container {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+                
+                .banner-item {
+                    padding: 25px;
+                    min-height: 250px;
+                }
+                
+                .banner-grid {
+                    padding: 40px 15px 30px;
+                    min-height: auto;
+                }
+            }
+        </style>
 
         <section class="advantages">
             <div class="container">
