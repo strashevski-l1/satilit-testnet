@@ -2,7 +2,11 @@ class PasswordProtection {
   constructor() {
     this.sessionId = this.generateSessionId();
     this.initProtection();
-    this.checkAuthStatus();
+    this.init();
+  }
+
+  async init() {
+    await this.checkAuthStatus();
     this.createPasswordForm();
     this.startSecurityChecks();
   }
@@ -81,9 +85,9 @@ class PasswordProtection {
            localStorage.getItem('sessionId') === this.sessionId;
   }
 
-  checkAuthStatus() {
+  async checkAuthStatus() {
     if (this.isAuthenticated()) {
-      this.showMainContent();
+      await this.showMainContent();
     } else {
       this.showPasswordForm();
     }
@@ -230,7 +234,7 @@ class PasswordProtection {
       if (data.success) {
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('sessionId', this.sessionId);
-        this.showMainContent();
+        await this.showMainContent();
       } else {
         errorDiv.textContent = data.error || 'Неверный пароль';
         errorDiv.style.display = 'block';
@@ -250,12 +254,45 @@ class PasswordProtection {
     }
   }
 
-  showMainContent() {
+  async showMainContent() {
     document.body.style.overflow = '';
     document.body.classList.add('auth-verified');
     const overlay = document.getElementById('passwordOverlay');
     if (overlay) {
       overlay.remove();
+    }
+    
+    // Загружаем основной контент
+    await this.loadMainContent();
+  }
+
+  async loadMainContent() {
+    const token = localStorage.getItem('authToken');
+    
+    try {
+      const response = await fetch('/api/content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        document.getElementById('app-container').innerHTML = data.content;
+        document.title = 'Сателлит Казино - Современная платформа азартных игр';
+        
+        // Переинициализируем скрипты после загрузки контента
+        if (window.initializeScripts) {
+          window.initializeScripts();
+        }
+      } else {
+        this.logout();
+      }
+    } catch (error) {
+      console.error('Ошибка загрузки контента:', error);
+      this.logout();
     }
   }
 }
