@@ -108,103 +108,70 @@ class PasswordProtection {
         left: 0;
         width: 100%;
         height: 100%;
-        background: #000000;
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         z-index: 10000;
-        font-family: 'Courier New', monospace;
       ">
         <div style="
-          background: #000000;
-          border: 1px solid #777;
+          background: white;
           padding: 40px;
-          text-align: left;
+          border-radius: 20px;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+          text-align: center;
           max-width: 400px;
           width: 90%;
         ">
           <h2 style="
-            color: #fff;
-            margin: 0 0 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            font-weight: normal;
-          ">ACCESS RESTRICTED</h2>
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+          ">🔒 Доступ ограничен</h2>
           <p style="
-            color: #777;
-            margin: 0 0 30px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-          ">Enter password to proceed</p>
+            color: #666;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+          ">Введите пароль для просмотра содержимого сайта</p>
           <form id="passwordForm">
-            <div style="margin-bottom: 20px;">
-              <label style="
-                color: #777;
-                font-family: 'Courier New', monospace;
-                font-size: 12px;
-                display: block;
-                margin-bottom: 5px;
-              ">PASSWORD:</label>
-              <input 
-                type="password" 
-                id="passwordInput" 
-                style="
-                  width: 100%;
-                  padding: 10px;
-                  border: 1px solid #777;
-                  background: #000000;
-                  color: #fff;
-                  font-size: 14px;
-                  box-sizing: border-box;
-                  font-family: 'Courier New', monospace;
-                "
-                required
-              />
-            </div>
+            <input 
+              type="password" 
+              id="passwordInput" 
+              placeholder="Введите пароль"
+              style="
+                width: 100%;
+                padding: 15px;
+                border: 2px solid #ddd;
+                border-radius: 10px;
+                font-size: 16px;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+              "
+              required
+            />
             <button 
               type="submit"
               style="
-                padding: 10px 20px;
-                background: #000000;
-                color: #fff;
-                border: 1px solid #777;
-                font-size: 14px;
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 16px;
                 cursor: pointer;
-                font-family: 'Courier New', monospace;
+                font-family: 'Inter', sans-serif;
+                font-weight: 600;
               "
-            >ENTER</button>
+            >Войти</button>
           </form>
           <div id="errorMessage" style="
-            color: #777;
+            color: #e74c3c;
             margin-top: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
+            font-family: 'Inter', sans-serif;
             display: none;
           "></div>
-        </div>
-        
-        <div style="
-          position: absolute;
-          bottom: 20px;
-          left: 20px;
-          right: 20px;
-          border-top: 1px solid #777;
-          padding-top: 20px;
-          text-align: center;
-        ">
-          <div style="
-            color: #777;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            margin-bottom: 10px;
-          ">Buy access for 0.05 ETH</div>
-          <div style="
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            word-break: break-all;
-          ">0xd19a8132c4ab8a9fde0acffa786c3f8b01738ad7</div>
         </div>
       </div>
     `;
