@@ -163,28 +163,156 @@ function showSiteContent() {
   if (!container) return;
   
   container.innerHTML = `
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="logo">
-                    <h1>САТЕЛЛИТ</h1>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Главная</a></li>
-                    <li><a href="#games" class="nav-link">Игры</a></li>
-                    <li><a href="#bonuses" class="nav-link">Бонусы</a></li>
-                    <li><a href="#about" class="nav-link">О нас</a></li>
-                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
-                </ul>
-                <div class="auth-buttons">
-                    <button class="btn btn-outline" id="loginBtn">Войти</button>
-                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
-                </div>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+    <style>
+      .orochi-header {
+        background: #000000;
+        border-bottom: 1px solid #1a1a1a;
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      
+      .orochi-nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      
+      .orochi-logo {
+        font-size: 24px;
+        font-weight: 700;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+      }
+      
+      .orochi-menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 40px;
+      }
+      
+      .orochi-menu-item {
+        position: relative;
+      }
+      
+      .orochi-menu-link {
+        color: #cccccc;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 10px 0;
+        transition: color 0.2s ease;
+        position: relative;
+      }
+      
+      .orochi-menu-link:hover {
+        color: #ffffff;
+      }
+      
+      .orochi-menu-link:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ffffff;
+        transition: width 0.3s ease;
+      }
+      
+      .orochi-menu-link:hover:after {
+        width: 100%;
+      }
+      
+      .orochi-auth {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+      
+      .orochi-btn {
+        padding: 8px 20px;
+        background: transparent;
+        border: 1px solid #333333;
+        color: #cccccc;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      
+      .orochi-btn:hover {
+        background: #ffffff;
+        color: #000000;
+        border-color: #ffffff;
+      }
+      
+      .orochi-btn-primary {
+        background: #ffffff;
+        color: #000000;
+        border-color: #ffffff;
+      }
+      
+      .orochi-btn-primary:hover {
+        background: transparent;
+        color: #ffffff;
+      }
+      
+      @media (max-width: 768px) {
+        .orochi-menu {
+          display: none;
+        }
+        
+        .orochi-auth {
+          gap: 10px;
+        }
+        
+        .orochi-btn {
+          padding: 6px 15px;
+          font-size: 11px;
+        }
+      }
+    </style>
+    
+    <header class="orochi-header">
+        <nav class="orochi-nav">
+            <a href="#" class="orochi-logo">САТЕЛЛИТ</a>
+            
+            <ul class="orochi-menu">
+                <li class="orochi-menu-item">
+                    <a href="#home" class="orochi-menu-link">Коллекции</a>
+                </li>
+                <li class="orochi-menu-item">
+                    <a href="#games" class="orochi-menu-link">Новинки</a>
+                </li>
+                <li class="orochi-menu-item">
+                    <a href="#bonuses" class="orochi-menu-link">От авторов</a>
+                </li>
+                <li class="orochi-menu-item">
+                    <a href="#about" class="orochi-menu-link">Покупателям</a>
+                </li>
+                <li class="orochi-menu-item">
+                    <a href="#contacts" class="orochi-menu-link">Каталог</a>
+                </li>
+            </ul>
+            
+            <div class="orochi-auth">
+                <button class="orochi-btn">Войти</button>
+                <button class="orochi-btn orochi-btn-primary">Регистрация</button>
             </div>
         </nav>
     </header>
