@@ -1,172 +1,168 @@
-class PasswordProtection {
-  constructor() {
-    this.checkAuthStatus();
+// Простая система аутентификации
+document.addEventListener('DOMContentLoaded', function() {
+  // Проверяем токен при загрузке
+  const token = localStorage.getItem('authToken');
+  if (token === 'access_granted') {
+    showSiteContent();
+  } else {
+    showLoginForm();
   }
+});
 
-  checkAuthStatus() {
-    const token = localStorage.getItem('authToken');
-    if (token === 'access_granted') {
-      this.showMainContent();
-    } else {
-      this.createPasswordForm();
-    }
-  }
-
-  createPasswordForm() {
-    const formHTML = `
-      <div id="passwordOverlay" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+function showLoginForm() {
+  const container = document.getElementById('app-container');
+  if (!container) return;
+  
+  container.innerHTML = `
+    <div style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      font-family: 'Courier New', monospace;
+    ">
+      <div style="
         background: #000000;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        font-family: 'Courier New', monospace;
+        border: 1px solid #777;
+        padding: 40px;
+        text-align: left;
+        max-width: 400px;
+        width: 90%;
       ">
-        <div style="
-          background: #000000;
-          border: 1px solid #777;
-          padding: 40px;
-          text-align: left;
-          max-width: 400px;
-          width: 90%;
-        ">
-          <h2 style="
-            color: #fff;
-            margin: 0 0 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            font-weight: normal;
-          ">ACCESS RESTRICTED</h2>
-          <p style="
-            color: #777;
-            margin: 0 0 30px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-          ">Enter password to proceed</p>
-          <form id="passwordForm">
-            <div style="margin-bottom: 20px;">
-              <label style="
-                color: #777;
-                font-family: 'Courier New', monospace;
-                font-size: 12px;
-                display: block;
-                margin-bottom: 5px;
-              ">PASSWORD:</label>
-              <input 
-                type="password" 
-                id="passwordInput" 
-                style="
-                  width: 100%;
-                  padding: 10px;
-                  border: 1px solid #777;
-                  background: #000000;
-                  color: #fff;
-                  font-size: 14px;
-                  box-sizing: border-box;
-                  font-family: 'Courier New', monospace;
-                "
-                required
-              />
-            </div>
-            <button 
-              type="submit"
+        <h2 style="
+          color: #fff;
+          margin: 0 0 20px 0;
+          font-family: 'Courier New', monospace;
+          font-size: 18px;
+          font-weight: normal;
+        ">ACCESS RESTRICTED</h2>
+        <p style="
+          color: #777;
+          margin: 0 0 30px 0;
+          font-family: 'Courier New', monospace;
+          font-size: 14px;
+        ">Enter password to proceed</p>
+        <form id="loginForm">
+          <div style="margin-bottom: 20px;">
+            <label style="
+              color: #777;
+              font-family: 'Courier New', monospace;
+              font-size: 12px;
+              display: block;
+              margin-bottom: 5px;
+            ">PASSWORD:</label>
+            <input 
+              type="password" 
+              id="passwordField"
               style="
-                padding: 10px 20px;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #777;
                 background: #000000;
                 color: #fff;
-                border: 1px solid #777;
                 font-size: 14px;
-                cursor: pointer;
+                box-sizing: border-box;
                 font-family: 'Courier New', monospace;
               "
-            >ENTER</button>
-          </form>
-          <div id="errorMessage" style="
-            color: #777;
-            margin-top: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            display: none;
-          "></div>
-        </div>
-        
-        <div style="
-          position: absolute;
-          bottom: 20px;
-          left: 20px;
-          right: 20px;
-          border-top: 1px solid #777;
-          padding-top: 20px;
-          text-align: center;
-        ">
-          <div style="
-            color: #777;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            margin-bottom: 10px;
-          ">Buy access for 0.05 ETH</div>
-          <div style="
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            word-break: break-all;
-          ">0xd19a8132c4ab8a9fde0acffa786c3f8b01738ad7</div>
-        </div>
+              required
+            />
+          </div>
+          <button 
+            type="submit"
+            style="
+              padding: 10px 20px;
+              background: #000000;
+              color: #fff;
+              border: 1px solid #777;
+              font-size: 14px;
+              cursor: pointer;
+              font-family: 'Courier New', monospace;
+            "
+          >ENTER</button>
+        </form>
+        <div id="error" style="
+          color: #777;
+          margin-top: 15px;
+          font-family: 'Courier New', monospace;
+          font-size: 12px;
+          display: none;
+        "></div>
       </div>
-    `;
+      
+      <div style="
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        border-top: 1px solid #777;
+        padding-top: 20px;
+        text-align: center;
+      ">
+        <div style="
+          color: #777;
+          font-family: 'Courier New', monospace;
+          font-size: 12px;
+          margin-bottom: 10px;
+        ">Buy access for 0.05 ETH</div>
+        <div style="
+          color: #fff;
+          font-family: 'Courier New', monospace;
+          font-size: 11px;
+          word-break: break-all;
+        ">0xd19a8132c4ab8a9fde0acffa786c3f8b01738ad7</div>
+      </div>
+    </div>
+  `;
 
-    document.body.insertAdjacentHTML('afterbegin', formHTML);
-    
-    const form = document.getElementById('passwordForm');
-    form.addEventListener('submit', (e) => this.handlePasswordSubmit(e));
+  // Добавляем обработчик формы
+  const form = document.getElementById('loginForm');
+  if (form) {
+    form.addEventListener('submit', handleLogin);
   }
+}
 
-  async handlePasswordSubmit(e) {
-    e.preventDefault();
-    const password = document.getElementById('passwordInput').value;
-    const errorDiv = document.getElementById('errorMessage');
+async function handleLogin(event) {
+  event.preventDefault();
+  const password = document.getElementById('passwordField').value;
+  const errorDiv = document.getElementById('error');
+  
+  try {
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password: password }),
+    });
 
-    try {
-      const response = await fetch('/api/auth', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password }),
-      });
+    const data = await response.json();
 
-      const data = await response.json();
-
-      if (data.success) {
-        localStorage.setItem('authToken', data.token);
-        this.showMainContent();
-      } else {
-        errorDiv.textContent = data.error || 'Неверный пароль';
-        errorDiv.style.display = 'block';
-        document.getElementById('passwordInput').value = '';
-      }
-    } catch (error) {
-      errorDiv.textContent = 'Ошибка подключения к серверу';
+    if (data.success) {
+      localStorage.setItem('authToken', 'access_granted');
+      showSiteContent();
+    } else {
+      errorDiv.textContent = 'Invalid password';
       errorDiv.style.display = 'block';
+      document.getElementById('passwordField').value = '';
     }
+  } catch (error) {
+    errorDiv.textContent = 'Connection error';
+    errorDiv.style.display = 'block';
   }
+}
 
-
-  showMainContent() {
-    document.body.style.overflow = '';
-    const overlay = document.getElementById('passwordOverlay');
-    if (overlay) {
-      overlay.remove();
-    }
-    
-    // Вставляем весь контент сайта
-    const siteContent = \`
+function showSiteContent() {
+  const container = document.getElementById('app-container');
+  if (!container) return;
+  
+  container.innerHTML = `
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
@@ -269,33 +265,6 @@ class PasswordProtection {
                             <p>RTP: 96.2%</p>
                         </div>
                     </div>
-                    <div class="slot-card" data-slot="4">
-                        <div class="slot-image">
-                            <div class="slot-placeholder">СЛОТ 4</div>
-                        </div>
-                        <div class="slot-info">
-                            <h4>Египетские тайны</h4>
-                            <p>RTP: 97.1%</p>
-                        </div>
-                    </div>
-                    <div class="slot-card" data-slot="5">
-                        <div class="slot-image">
-                            <div class="slot-placeholder">СЛОТ 5</div>
-                        </div>
-                        <div class="slot-info">
-                            <h4>Дикий запад</h4>
-                            <p>RTP: 96.0%</p>
-                        </div>
-                    </div>
-                    <div class="slot-card" data-slot="6">
-                        <div class="slot-image">
-                            <div class="slot-placeholder">СЛОТ 6</div>
-                        </div>
-                        <div class="slot-info">
-                            <h4>Алмазная лихорадка</h4>
-                            <p>RTP: 95.9%</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -355,265 +324,7 @@ class PasswordProtection {
             </div>
         </div>
     </footer>
-
-    <!-- Модальные окна -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Вход в аккаунт</h2>
-                <span class="close">&times;</span>
-            </div>
-            <form class="modal-form">
-                <div class="form-group">
-                    <input type="email" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Пароль" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Войти</button>
-                <p class="form-text">
-                    Нет аккаунта? <a href="#" id="switchToRegister">Зарегистрироваться</a>
-                </p>
-            </form>
-        </div>
-    </div>
-
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Регистрация</h2>
-                <span class="close">&times;</span>
-            </div>
-            <form class="modal-form">
-                <div class="form-group">
-                    <input type="text" placeholder="Имя" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Пароль" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Подтвердите пароль" required>
-                </div>
-                <div class="form-checkbox">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">Я согласен с правилами и условиями</label>
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Зарегистрироваться</button>
-                <p class="form-text">
-                    Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a>
-                </p>
-            </form>
-        </div>
-    </div>
-    \`;
-    
-    document.getElementById('app-container').innerHTML = siteContent;
-    document.title = 'Сателлит Казино - Современная платформа азартных игр';
-    document.body.classList.remove('auth-verified');
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  try {
-    new PasswordProtection();
-  } catch (error) {
-    console.error('Ошибка инициализации:', error);
-    // Показываем форму напрямую если есть ошибка
-    document.getElementById('app-container').innerHTML = `
-      <div style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        font-family: 'Courier New', monospace;
-      ">
-        <div style="
-          background: #000000;
-          border: 1px solid #777;
-          padding: 40px;
-          text-align: left;
-          max-width: 400px;
-          width: 90%;
-        ">
-          <h2 style="
-            color: #fff;
-            margin: 0 0 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            font-weight: normal;
-          ">ACCESS RESTRICTED</h2>
-          <p style="
-            color: #777;
-            margin: 0 0 30px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-          ">Enter password to proceed</p>
-          <form onsubmit="handleAuth(event)">
-            <div style="margin-bottom: 20px;">
-              <label style="
-                color: #777;
-                font-family: 'Courier New', monospace;
-                font-size: 12px;
-                display: block;
-                margin-bottom: 5px;
-              ">PASSWORD:</label>
-              <input 
-                type="password" 
-                id="simplePasswordInput"
-                style="
-                  width: 100%;
-                  padding: 10px;
-                  border: 1px solid #777;
-                  background: #000000;
-                  color: #fff;
-                  font-size: 14px;
-                  box-sizing: border-box;
-                  font-family: 'Courier New', monospace;
-                "
-                required
-              />
-            </div>
-            <button 
-              type="submit"
-              style="
-                padding: 10px 20px;
-                background: #000000;
-                color: #fff;
-                border: 1px solid #777;
-                font-size: 14px;
-                cursor: pointer;
-                font-family: 'Courier New', monospace;
-              "
-            >ENTER</button>
-          </form>
-        </div>
-        
-        <div style="
-          position: absolute;
-          bottom: 20px;
-          left: 20px;
-          right: 20px;
-          border-top: 1px solid #777;
-          padding-top: 20px;
-          text-align: center;
-        ">
-          <div style="
-            color: #777;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            margin-bottom: 10px;
-          ">Buy access for 0.05 ETH</div>
-          <div style="
-            color: #fff;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            word-break: break-all;
-          ">0xd19a8132c4ab8a9fde0acffa786c3f8b01738ad7</div>
-        </div>
-      </div>
-    `;
-  }
-});
-
-// Простая функция аутентификации
-async function handleAuth(event) {
-  event.preventDefault();
-  const password = document.getElementById('simplePasswordInput').value;
+  `;
   
-  try {
-    const response = await fetch('/api/auth', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ password }),
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      localStorage.setItem('authToken', data.token);
-      loadSiteContent();
-    } else {
-      alert('Неверный пароль');
-    }
-  } catch (error) {
-    alert('Ошибка подключения к серверу');
-  }
-}
-
-// Загрузка контента сайта
-function loadSiteContent() {
-  const siteContent = \`
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="logo">
-                    <h1>САТЕЛЛИТ</h1>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Главная</a></li>
-                    <li><a href="#games" class="nav-link">Игры</a></li>
-                    <li><a href="#bonuses" class="nav-link">Бонусы</a></li>
-                    <li><a href="#about" class="nav-link">О нас</a></li>
-                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
-                </ul>
-                <div class="auth-buttons">
-                    <button class="btn btn-outline" id="loginBtn">Войти</button>
-                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Добро пожаловать в мир азартных игр</h1>
-                <p class="hero-subtitle">Современная платформа онлайн казино с лицензированными играми и честной игрой</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary btn-large">Начать играть</button>
-                    <button class="btn btn-outline btn-large">Узнать больше</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="advantages">
-            <div class="container">
-                <h2 class="section-title">Наши преимущества</h2>
-                <div class="advantages-grid">
-                    <div class="advantage-card">
-                        <div class="advantage-icon">🛡️</div>
-                        <h3>Безопасность</h3>
-                        <p>Лицензированная платформа с шифрованием данных</p>
-                    </div>
-                    <div class="advantage-card">
-                        <div class="advantage-icon">⚡</div>
-                        <h3>Быстрые выплаты</h3>
-                        <p>Мгновенные депозиты и быстрые выводы средств</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Сателлит Казино. Все права защищены.</p>
-        </div>
-    </footer>
-  \`;
-  
-  document.getElementById('app-container').innerHTML = siteContent;
   document.title = 'Сателлит Казино - Современная платформа азартных игр';
 }
