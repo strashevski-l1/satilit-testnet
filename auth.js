@@ -1,7 +1,6 @@
 class PasswordProtection {
   constructor() {
     this.checkAuthStatus();
-    this.createPasswordForm();
   }
 
   checkAuthStatus() {
@@ -9,7 +8,7 @@ class PasswordProtection {
     if (token === 'access_granted') {
       this.showMainContent();
     } else {
-      this.showPasswordForm();
+      this.createPasswordForm();
     }
   }
 
@@ -158,13 +157,6 @@ class PasswordProtection {
     }
   }
 
-  showPasswordForm() {
-    document.body.style.overflow = 'hidden';
-    const overlay = document.getElementById('passwordOverlay');
-    if (overlay) {
-      overlay.style.display = 'flex';
-    }
-  }
 
   showMainContent() {
     document.body.style.overflow = '';
