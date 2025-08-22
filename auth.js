@@ -192,38 +192,41 @@ function showSiteContent() {
     <main>
         <section class="banner-section">
             <div class="banner-container">
-                <!-- Большой баннер сверху -->
+                <!-- Большой баннер сверху точно как на скриншоте -->
                 <div class="main-banner">
                     <div class="main-banner-bg"></div>
-                    <div class="main-banner-content">
-                        <h1 class="main-banner-title">ДОБРО ПОЖАЛОВАТЬ В МИР АЗАРТНЫХ ИГР</h1>
-                        <p class="main-banner-subtitle">Современная платформа онлайн казино с лицензированными играми и честной игрой</p>
-                    </div>
-                    <!-- Персонажи как на скриншоте -->
-                    <div class="banner-characters">
-                        <img src="assets/bg-banner-desktop-Dl6I0ttm.webp" alt="Characters" class="characters-image">
-                    </div>
+                    <img src="assets/bg-banner-desktop-Dl6I0ttm.webp" alt="Game Characters" class="banner-characters">
                 </div>
                 
-                <!-- Два маленьких баннера снизу -->
-                <div class="small-banners">
-                    <div class="small-banner casino-small">
-                        <div class="small-banner-bg"></div>
-                        <div class="small-banner-icon">🎰</div>
-                        <div class="small-banner-content">
-                            <h3 class="small-banner-title">CASINO</h3>
-                            <p class="small-banner-description">We offer a comprehensive range of exciting casino games, including classic slots, video slots, table games, and live dealer options featuring real dealers.</p>
-                            <button class="small-banner-btn">Play now</button>
+                <!-- Два баннера снизу точно как на скриншоте -->
+                <div class="bottom-banners">
+                    <div class="bottom-banner casino-banner">
+                        <div class="casino-bg"></div>
+                        <div class="banner-icon casino-icon">
+                            <div class="slot-machine">
+                                <div class="slot-display">777</div>
+                                <div class="slot-handle"></div>
+                            </div>
+                        </div>
+                        <div class="banner-info">
+                            <h3 class="banner-title">CASINO</h3>
+                            <p class="banner-desc">We offer a comprehensive range of exciting casino games, including classic slots, video slots, table games, and live dealer options featuring real dealers and authentic casino atmosphere.</p>
+                            <button class="banner-button purple-btn">Play now</button>
                         </div>
                     </div>
                     
-                    <div class="small-banner sport-small">
-                        <div class="small-banner-bg"></div>
-                        <div class="small-banner-icon">⚽</div>
-                        <div class="small-banner-content">
-                            <h3 class="small-banner-title">SPORT BETTING</h3>
-                            <p class="small-banner-description">Here, you can bet on your favorite sports events from around the world. We offer extensive coverage, such as live bets and competitive odds.</p>
-                            <button class="small-banner-btn">Place bets</button>
+                    <div class="bottom-banner sport-banner">
+                        <div class="sport-bg"></div>
+                        <div class="banner-icon sport-icon">
+                            <div class="sport-balls">
+                                <div class="soccer-ball"></div>
+                                <div class="basketball"></div>
+                            </div>
+                        </div>
+                        <div class="banner-info">
+                            <h3 class="banner-title">SPORT BETTING</h3>
+                            <p class="banner-desc">Here, you can bet on your favorite sports events from around the world. We offer extensive coverage, such as live bets and competitive odds.</p>
+                            <button class="banner-button purple-btn">Place bets</button>
                         </div>
                     </div>
                 </div>
@@ -233,7 +236,7 @@ function showSiteContent() {
         <style>
             .banner-section {
                 padding: 0;
-                background: var(--bg-dark);
+                background: #0d1421;
                 min-height: 80vh;
             }
             
@@ -243,21 +246,19 @@ function showSiteContent() {
                 padding: 20px;
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
                 height: 80vh;
             }
             
-            /* Большой баннер */
+            /* Большой баннер точно как на скриншоте */
             .main-banner {
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f1419 100%);
-                border-radius: 16px;
-                height: 60%;
+                background: linear-gradient(135deg, #2a3b5c 0%, #1e2a44 50%, #0f1a2e 100%);
+                border-radius: 12px;
+                height: 65%;
                 position: relative;
                 overflow: hidden;
                 display: flex;
                 align-items: center;
-                padding: 40px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             }
             
             .main-banner-bg {
@@ -266,151 +267,221 @@ function showSiteContent() {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat center;
-                background-size: cover;
-                opacity: 0.3;
-                z-index: 1;
-            }
-            
-            .main-banner-content {
-                position: relative;
+                background: linear-gradient(to right, rgba(42,59,92,0.8) 0%, rgba(42,59,92,0.3) 70%, transparent 100%);
                 z-index: 2;
-                max-width: 50%;
-                color: white;
-            }
-            
-            .main-banner-title {
-                font-size: 36px;
-                font-weight: 800;
-                color: #ffffff;
-                margin-bottom: 20px;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                line-height: 1.2;
-            }
-            
-            .main-banner-subtitle {
-                font-size: 16px;
-                color: #b0b0b0;
-                line-height: 1.6;
-                margin-bottom: 0;
             }
             
             .banner-characters {
                 position: absolute;
-                right: 0;
+                right: -50px;
                 top: 0;
-                height: 100%;
-                width: 50%;
-                z-index: 2;
+                height: 120%;
+                width: auto;
+                z-index: 1;
+                object-fit: contain;
             }
             
-            .characters-image {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: right center;
-            }
-            
-            /* Маленькие баннеры */
-            .small-banners {
+            /* Нижние баннеры точно как на скриншоте */
+            .bottom-banners {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 20px;
-                height: 35%;
+                gap: 15px;
+                height: 30%;
             }
             
-            .small-banner {
-                border-radius: 16px;
+            .bottom-banner {
+                border-radius: 12px;
                 position: relative;
                 overflow: hidden;
-                padding: 25px;
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 gap: 20px;
-                transition: transform 0.3s ease;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                padding: 25px;
             }
             
-            .small-banner:hover {
-                transform: translateY(-3px);
+            /* Casino баннер */
+            .casino-banner {
+                background: linear-gradient(135deg, #8b1538 0%, #5d0e24 100%);
+                position: relative;
             }
             
-            .casino-small {
-                background: linear-gradient(135deg, rgba(220,20,60,0.8) 0%, rgba(139,0,0,0.9) 100%);
-            }
-            
-            .casino-small .small-banner-bg {
-                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat left center;
-                background-size: cover;
-                opacity: 0.2;
-            }
-            
-            .sport-small {
-                background: linear-gradient(135deg, rgba(25,25,112,0.8) 0%, rgba(72,61,139,0.9) 100%);
-            }
-            
-            .sport-small .small-banner-bg {
-                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat right center;
-                background-size: cover;
-                opacity: 0.2;
-            }
-            
-            .small-banner-bg {
+            .casino-bg {
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
+                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat left center;
+                background-size: cover;
+                opacity: 0.15;
                 z-index: 1;
             }
             
-            .small-banner-icon {
-                font-size: 32px;
-                z-index: 2;
+            /* Sport баннер */
+            .sport-banner {
+                background: linear-gradient(135deg, #1a3a7a 0%, #0f1e42 100%);
                 position: relative;
             }
             
-            .small-banner-content {
+            .sport-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('assets/bg-banner-desktop-Dl6I0ttm.webp') no-repeat right center;
+                background-size: cover;
+                opacity: 0.15;
+                z-index: 1;
+            }
+            
+            /* Иконки точно как на скриншоте */
+            .banner-icon {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                z-index: 3;
+                flex-shrink: 0;
+            }
+            
+            /* Слот-машина */
+            .slot-machine {
+                width: 80px;
+                height: 80px;
+                background: linear-gradient(145deg, #ff6b35 0%, #f7931e 100%);
+                border-radius: 8px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+            }
+            
+            .slot-display {
+                background: #000;
+                color: #00ff00;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            
+            .slot-handle {
+                position: absolute;
+                right: -8px;
+                top: 15px;
+                width: 6px;
+                height: 30px;
+                background: #333;
+                border-radius: 3px;
+            }
+            
+            /* Спортивные мячи */
+            .sport-balls {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .soccer-ball {
+                width: 35px;
+                height: 35px;
+                background: #fff;
+                border-radius: 50%;
+                position: relative;
+                border: 2px solid #000;
+            }
+            
+            .soccer-ball::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 12px;
+                height: 12px;
+                background: #000;
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            }
+            
+            .basketball {
+                width: 30px;
+                height: 30px;
+                background: #d2691e;
+                border-radius: 50%;
+                position: relative;
+            }
+            
+            .basketball::before {
+                content: '';
+                position: absolute;
+                top: 2px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 1px;
+                height: 26px;
+                background: #000;
+            }
+            
+            .basketball::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 2px;
+                transform: translateY(-50%);
+                width: 26px;
+                height: 1px;
+                background: #000;
+            }
+            
+            /* Текст и кнопки */
+            .banner-info {
                 flex: 1;
-                z-index: 2;
+                z-index: 3;
                 position: relative;
             }
             
-            .small-banner-title {
+            .banner-title {
                 font-size: 18px;
                 font-weight: 700;
                 color: #ffffff;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
                 text-transform: uppercase;
                 letter-spacing: 1px;
             }
             
-            .small-banner-description {
-                font-size: 13px;
+            .banner-desc {
+                font-size: 12px;
                 color: #e0e0e0;
                 line-height: 1.4;
                 margin-bottom: 15px;
+                opacity: 0.9;
             }
             
-            .small-banner-btn {
-                background: rgba(255,255,255,0.2);
+            .banner-button {
+                background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
                 color: #ffffff;
-                border: 1px solid rgba(255,255,255,0.3);
-                padding: 8px 16px;
+                border: none;
+                padding: 10px 20px;
                 border-radius: 6px;
                 font-size: 12px;
                 font-weight: 600;
                 text-transform: uppercase;
-                letter-spacing: 1px;
+                letter-spacing: 0.5px;
                 cursor: pointer;
                 transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
             }
             
-            .small-banner-btn:hover {
-                background: #ffffff;
-                color: #000000;
-                border-color: #ffffff;
+            .banner-button:hover {
+                background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
             }
             
             @media (max-width: 768px) {
@@ -421,36 +492,46 @@ function showSiteContent() {
                 }
                 
                 .main-banner {
-                    height: 300px;
-                    padding: 30px 20px;
-                }
-                
-                .main-banner-content {
-                    max-width: 100%;
-                }
-                
-                .main-banner-title {
-                    font-size: 24px;
-                }
-                
-                .main-banner-subtitle {
-                    font-size: 14px;
+                    height: 250px;
                 }
                 
                 .banner-characters {
-                    opacity: 0.3;
+                    opacity: 0.6;
+                    right: -100px;
                 }
                 
-                .small-banners {
+                .bottom-banners {
                     grid-template-columns: 1fr;
                     gap: 15px;
                 }
                 
-                .small-banner {
+                .bottom-banner {
                     padding: 20px;
-                    flex-direction: column;
-                    gap: 15px;
-                    text-align: center;
+                }
+                
+                .banner-icon {
+                    width: 60px;
+                    height: 60px;
+                }
+                
+                .slot-machine {
+                    width: 60px;
+                    height: 60px;
+                }
+                
+                .sport-balls {
+                    width: 60px;
+                    height: 60px;
+                }
+                
+                .soccer-ball {
+                    width: 28px;
+                    height: 28px;
+                }
+                
+                .basketball {
+                    width: 24px;
+                    height: 24px;
                 }
             }
         </style>
