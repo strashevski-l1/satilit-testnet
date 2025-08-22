@@ -1,103 +1,16 @@
 class PasswordProtection {
   constructor() {
-    this.sessionId = this.generateSessionId();
-    this.initProtection();
-    this.init();
-  }
-
-  async init() {
-    await this.checkAuthStatus();
+    this.checkAuthStatus();
     this.createPasswordForm();
-    this.startSecurityChecks();
   }
 
-  initProtection() {
-    // Отключаем контекстное меню
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    
-    // Блокируем горячие клавиши разработчика
-    document.addEventListener('keydown', e => {
-      if (e.key === 'F12' || 
-          (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
-          (e.ctrlKey && e.key === 'U')) {
-        e.preventDefault();
-      }
-    });
-
-    // Скрываем содержимое при попытке выделения
-    document.addEventListener('selectstart', e => {
-      if (!document.body.classList.contains('auth-verified')) {
-        e.preventDefault();
-      }
-    });
-
-    // Обнаружение DevTools
-    let devtools = {open: false, orientation: null};
-    const threshold = 160;
-    setInterval(() => {
-      if (window.outerHeight - window.innerHeight > threshold || 
-          window.outerWidth - window.innerWidth > threshold) {
-        if (!devtools.open && !document.body.classList.contains('auth-verified')) {
-          document.body.innerHTML = '<div style="background:#000;color:#777;font-family:monospace;padding:20px;text-align:center;">Access Denied</div>';
-        }
-        devtools.open = true;
-      } else {
-        devtools.open = false;
-      }
-    }, 500);
-  }
-
-  generateSessionId() {
-    return Math.random().toString(36).substring(2) + Date.now().toString(36);
-  }
-
-  startSecurityChecks() {
-    // Проверяем валидность токена каждые 30 секунд
-    setInterval(() => {
-      this.validateToken();
-    }, 30000);
-
-    // Проверяем целостность DOM
-    setInterval(() => {
-      if (document.body.classList.contains('auth-verified')) {
-        const overlay = document.getElementById('passwordOverlay');
-        if (!overlay && !this.isAuthenticated()) {
-          location.reload();
-        }
-      }
-    }, 5000);
-  }
-
-  validateToken() {
+  checkAuthStatus() {
     const token = localStorage.getItem('authToken');
-    const sessionId = localStorage.getItem('sessionId');
-    
-    if (token === 'access_granted' && sessionId === this.sessionId) {
-      return true;
-    } else {
-      this.logout();
-      return false;
-    }
-  }
-
-  isAuthenticated() {
-    return localStorage.getItem('authToken') === 'access_granted' && 
-           localStorage.getItem('sessionId') === this.sessionId;
-  }
-
-  async checkAuthStatus() {
-    if (this.isAuthenticated()) {
-      await this.showMainContent();
+    if (token === 'access_granted') {
+      this.showMainContent();
     } else {
       this.showPasswordForm();
     }
-  }
-
-  logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('sessionId');
-    document.body.classList.remove('auth-verified');
-    location.reload();
   }
 
   createPasswordForm() {
@@ -233,8 +146,7 @@ class PasswordProtection {
 
       if (data.success) {
         localStorage.setItem('authToken', data.token);
-        localStorage.setItem('sessionId', this.sessionId);
-        await this.showMainContent();
+        this.showMainContent();
       } else {
         errorDiv.textContent = data.error || 'Неверный пароль';
         errorDiv.style.display = 'block';
@@ -254,46 +166,261 @@ class PasswordProtection {
     }
   }
 
-  async showMainContent() {
+  showMainContent() {
     document.body.style.overflow = '';
-    document.body.classList.add('auth-verified');
     const overlay = document.getElementById('passwordOverlay');
     if (overlay) {
       overlay.remove();
     }
     
-    // Загружаем основной контент
-    await this.loadMainContent();
-  }
+    // Вставляем весь контент сайта
+    const siteContent = \`
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>САТЕЛЛИТ</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Главная</a></li>
+                    <li><a href="#games" class="nav-link">Игры</a></li>
+                    <li><a href="#bonuses" class="nav-link">Бонусы</a></li>
+                    <li><a href="#about" class="nav-link">О нас</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Войти</button>
+                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  async loadMainContent() {
-    const token = localStorage.getItem('authToken');
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Добро пожаловать в мир азартных игр</h1>
+                <p class="hero-subtitle">Современная платформа онлайн казино с лицензированными играми и честной игрой</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" id="startPlayingBtn">Начать играть</button>
+                    <button class="btn btn-outline btn-large" id="learnMoreBtn">Узнать больше</button>
+                </div>
+            </div>
+            <div class="hero-bg">
+                <div class="floating-card card-1"></div>
+                <div class="floating-card card-2"></div>
+                <div class="floating-card card-3"></div>
+            </div>
+        </section>
+
+        <section class="advantages">
+            <div class="container">
+                <h2 class="section-title">Наши преимущества</h2>
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🛡️</div>
+                        <h3>Безопасность</h3>
+                        <p>Лицензированная платформа с шифрованием данных и защитой средств игроков</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">⚡</div>
+                        <h3>Быстрые выплаты</h3>
+                        <p>Мгновенные депозиты и быстрые выводы средств на все популярные платежные системы</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🎯</div>
+                        <h3>Честная игра</h3>
+                        <p>Генератор случайных чисел сертифицирован международными организациями</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🎁</div>
+                        <h3>Щедрые бонусы</h3>
+                        <p>Приветственные бонусы, акции и программа лояльности для постоянных игроков</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="games" class="games">
+            <div class="container">
+                <h2 class="section-title">Популярные игры</h2>
+                <div class="games-grid">
+                    <div class="slot-card" data-slot="1">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 1</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Космические приключения</h4>
+                            <p>RTP: 96.5%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="2">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 2</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Сокровища пиратов</h4>
+                            <p>RTP: 95.8%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="3">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 3</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Фруктовый взрыв</h4>
+                            <p>RTP: 96.2%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="4">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 4</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Египетские тайны</h4>
+                            <p>RTP: 97.1%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="5">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 5</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Дикий запад</h4>
+                            <p>RTP: 96.0%</p>
+                        </div>
+                    </div>
+                    <div class="slot-card" data-slot="6">
+                        <div class="slot-image">
+                            <div class="slot-placeholder">СЛОТ 6</div>
+                        </div>
+                        <div class="slot-info">
+                            <h4>Алмазная лихорадка</h4>
+                            <p>RTP: 95.9%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bonuses" class="bonuses">
+            <div class="container">
+                <h2 class="section-title">Бонусы и акции</h2>
+                <div class="bonuses-grid">
+                    <div class="bonus-card featured">
+                        <div class="bonus-badge">Популярное</div>
+                        <h3>Приветственный бонус</h3>
+                        <div class="bonus-amount">200%</div>
+                        <p>до 50 000 рублей + 100 фриспинов</p>
+                        <ul class="bonus-features">
+                            <li>✓ Бонус на первый депозит</li>
+                            <li>✓ Фриспины на популярные слоты</li>
+                            <li>✓ Вейджер x35</li>
+                        </ul>
+                        <button class="btn btn-primary">Получить бонус</button>
+                    </div>
+                    <div class="bonus-card">
+                        <h3>Еженедельный кэшбэк</h3>
+                        <div class="bonus-amount">15%</div>
+                        <p>возврат проигранных средств</p>
+                        <ul class="bonus-features">
+                            <li>✓ Каждый понедельник</li>
+                            <li>✓ Без отыгрыша</li>
+                            <li>✓ Автоматическое начисление</li>
+                        </ul>
+                        <button class="btn btn-outline">Узнать больше</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacts" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>САТЕЛЛИТ</h3>
+                    <p>Современное онлайн казино с честной игрой и быстрыми выплатами. Лицензия Кюрасао №365/JAZ.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li>📧 support@satellite-casino.com</li>
+                        <li>📞 +7 (800) 123-45-67</li>
+                        <li>💬 Онлайн чат: 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Сателлит Казино. Все права защищены.</p>
+                <p class="academic-notice">Данный сайт создан в академических целях.</p>
+                <span class="age-restriction">18+</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Вход в аккаунт</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Войти</button>
+                <p class="form-text">
+                    Нет аккаунта? <a href="#" id="switchToRegister">Зарегистрироваться</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Регистрация</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Подтвердите пароль" required>
+                </div>
+                <div class="form-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Я согласен с правилами и условиями</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Зарегистрироваться</button>
+                <p class="form-text">
+                    Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    \`;
     
-    try {
-      const response = await fetch('/api/content', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        document.getElementById('app-container').innerHTML = data.content;
-        document.title = 'Сателлит Казино - Современная платформа азартных игр';
-        
-        // Переинициализируем скрипты после загрузки контента
-        if (window.initializeScripts) {
-          window.initializeScripts();
-        }
-      } else {
-        this.logout();
-      }
-    } catch (error) {
-      console.error('Ошибка загрузки контента:', error);
-      this.logout();
-    }
+    document.getElementById('app-container').innerHTML = siteContent;
+    document.title = 'Сателлит Казино - Современная платформа азартных игр';
+    document.body.classList.remove('auth-verified');
   }
 }
 
