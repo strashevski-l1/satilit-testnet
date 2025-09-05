@@ -10,10 +10,18 @@ function initializeNavigation() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const body = document.body;
     
     hamburger?.addEventListener('click', function() {
+        const willOpen = !hamburger.classList.contains('active');
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        if (navMenu.classList.contains('active')) {
+            body.style.overflow = 'hidden';
+        } else {
+            body.style.overflow = '';
+        }
     });
     
     navLinks.forEach(link => {
@@ -21,6 +29,8 @@ function initializeNavigation() {
             if (navMenu?.classList.contains('active')) {
                 navMenu.classList.remove('active');
                 hamburger?.classList.remove('active');
+                hamburger?.setAttribute('aria-expanded', 'false');
+                body.style.overflow = '';
             }
         });
     });
@@ -33,6 +43,14 @@ function initializeNavigation() {
         active?.classList.add('active');
     }
     window.addEventListener('hashchange', updateActiveByHash);
+    document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && navMenu?.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburger?.classList.remove('active');
+            hamburger?.setAttribute('aria-expanded', 'false');
+            body.style.overflow = '';
+        }
+    });
     updateActiveByHash();
 }
 
@@ -61,8 +79,8 @@ function initializeModals() {
         }, 300);
     }
     
-    // Navigate to internal pages instead of modals
-    loginBtn?.addEventListener('click', () => { location.hash = '#/login'; });
+    // Route both header auth buttons to registration page (no modals)
+    loginBtn?.addEventListener('click', () => { location.hash = '#/register'; });
     registerBtn?.addEventListener('click', () => { location.hash = '#/register'; });
     startPlayingBtn?.addEventListener('click', () => { location.hash = '#/register'; });
     
