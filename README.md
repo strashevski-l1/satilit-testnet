@@ -1,27 +1,35 @@
-# Сателлит Казино - Защищенный сайт
+# BeonBet Casino (Academic) — Password-Protected Demo
 
-Этот проект содержит защиту паролем для предотвращения несанкционированного доступа к содержимому сайта.
+This repository hosts an academic, password-protected demo of a casino landing website for BeonBet. It includes:
 
-## Развертывание на Vercel
+- Modern responsive layout (header, hero, content sections, games, bonuses, FAQ)
+- Content infused from the provided BeonBet brief (EN), including FAQ JSON-LD
+- Lightweight UI interactions (smooth scroll, modals, FAQ accordion, slot demo modal)
+- Simple password gate to restrict public access
 
-1. Подключите репозиторий к Vercel через GitHub
-2. В настройках проекта на Vercel добавьте переменную окружения:
-   - `SITE_PASSWORD` - ваш секретный пароль для доступа к сайту
+## Deploy on Vercel
 
-## Как работает защита
+1. Connect the repo to Vercel via GitHub
+2. In Project Settings → Environment Variables add:
+   - `SITE_PASSWORD` — your secret password for access
+3. Deploy. Open the site and enter the password to view content
 
-- При первом посещении сайта пользователь увидит форму ввода пароля
-- После успешной аутентификации токен сохраняется в localStorage
-- API endpoint `/api/auth` проверяет пароль и возвращает токен доступа
+## How the protection works
 
-## Файлы защиты
+- On first visit, a password prompt overlay is shown
+- On success, a localStorage token (`authToken=access_granted`) is set
+- Client loads the site shell and mounts full BeonBet page
+- API endpoint `/api/auth` validates the password and returns success
 
-- `api/auth.js` - серверная функция для проверки пароля
-- `auth.js` - клиентский код для отображения формы и проверки токена
-- `vercel.json` - конфигурация для Vercel
+## Relevant files
 
-## Безопасность
+- `api/auth.js` — serverless auth handler (Vercel)
+- `auth.js` — client overlay + page renderer (injects HTML after auth)
+- `script.js` — UI interactions (nav, modals, FAQ, demo slot)
+- `styles.css` — shared theme and components
+- `assets/` — logo and banners
 
-- Пароль передается через HTTPS
-- Используются переменные окружения для хранения секретного пароля
-- Простая система токенов для локального хранения состояния аутентификации
+## Notes
+
+- Robots are disabled for indexing (robots.txt + meta). This is intentional for an academic demo
+- All casino names, offers, and figures are demonstration-only

@@ -45,6 +45,7 @@ function initializeNavigation() {
     
     window.addEventListener('scroll', function() {
         const header = document.querySelector('.header');
+        if (!header) return;
         if (window.scrollY > 100) {
             header.classList.add('scrolled');
         } else {
