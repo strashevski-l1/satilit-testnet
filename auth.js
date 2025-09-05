@@ -393,6 +393,7 @@ function showSiteContent() {
     root.innerHTML = `
       <section class="banner-hero with-bg" style="--hero-bg: url('${chooseHeroBackground()}')">
         <div class="banner-hero-bg" aria-hidden="true"></div>
+        <div class="banner-hero-inner" aria-hidden="true"></div>
         <div class="container">
           <div class="banner-wrap">
             <a href="#/register" class="banner-link">
