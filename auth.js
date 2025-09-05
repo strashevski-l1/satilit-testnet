@@ -242,6 +242,15 @@ function showSiteContent() {
     };
   }
 
+  function chooseHeroBackground() {
+    // Strong, cinematic background for the first screen
+    // Use available assets; adjust per locale if desired
+    const lang = REGION_TO_LANG[LOCALE] || LOCALE;
+    // Simple heuristic: sports focus for EN, otherwise lobby/bg artwork
+    if (lang === 'EN') return 'assets/sport-banner-DB5L_KsG.webp';
+    return 'assets/lobby-banner-CAFulc0X.webp';
+  }
+
   container.innerHTML = `
     <header class="header">
       <div class="nav-container">
@@ -382,7 +391,8 @@ function showSiteContent() {
     if (!root) return;
     const banners = chooseBannerPaths();
     root.innerHTML = `
-      <section class="banner-hero">
+      <section class="banner-hero with-bg" style="--hero-bg: url('${chooseHeroBackground()}')">
+        <div class="banner-hero-bg" aria-hidden="true"></div>
         <div class="container">
           <div class="banner-wrap">
             <a href="#/register" class="banner-link">
