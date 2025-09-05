@@ -292,6 +292,49 @@ function showSiteContent() {
         </div>
       </section>
 
+      <section class="deposit-section">
+        <div class="container deposit-wrap">
+          <div class="promo-card" role="region" aria-label="Welcome bonus widget">
+            <div class="promo-head">
+              <img class="promo-logo" src="assets/logo-CAVS3gze.webp" alt="BeonBet" />
+              <div>
+                <h1 class="promo-title">Welcome Pack</h1>
+                <p class="promo-sub">400% up to €2,150 + 300 FS</p>
+              </div>
+            </div>
+            <form id="depositWidget" class="promo-form">
+              <label class="form-label">Deposit Amount</label>
+              <div class="amount-row">
+                <button type="button" class="amount-btn amount-minus" aria-label="Decrease">−</button>
+                <input type="number" id="depositAmount" value="50" min="10" step="10" aria-label="Amount" />
+                <button type="button" class="amount-btn amount-plus" aria-label="Increase">+</button>
+              </div>
+              <div class="select-row">
+                <select id="country" aria-label="Country">
+                  <option value="EU" selected>Europe</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Canada">Canada</option>
+                </select>
+                <select id="currency" aria-label="Currency">
+                  <option value="EUR" selected>EUR</option>
+                  <option value="USD">USD</option>
+                  <option value="AUD">AUD</option>
+                </select>
+              </div>
+              <div class="bonus-row">
+                <div class="bonus-label">Choose your bonus <a href="#" class="tnc">T&C</a></div>
+                <select id="bonusPlan" aria-label="Bonus plan">
+                  <option value="400" selected>Welcome Pack 400%</option>
+                  <option value="150">Casino Welcome 1st Deposit 150%</option>
+                  <option value="100">Sports First Bet 100%</option>
+                </select>
+              </div>
+              <button id="getBonusBtn" class="btn btn-primary btn-full" type="button">Get €200.00</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       <section class="content">
         <div class="container">
           <p class="meta-desc">Join BeonBet, the trusted online casino, for real money slots, thrilling table games, and immersive live dealer experiences. Claim your generous welcome bonus and enjoy a secure mobile casino adventure! BeonBet login for instant play.</p>
@@ -440,6 +483,9 @@ function showSiteContent() {
 
     // Re-bind FAQ behavior for dynamically injected content
     window.initializeFAQ?.();
+
+    // Init deposit widget
+    window.initializeDepositWidget?.();
 
     // Ensure FAQ JSON-LD present (no duplicates)
     ensureFaqJsonLd();

@@ -969,6 +969,11 @@ body {
   .banner-mobile { display: block; }
 }
 
+/* Deposit widget under banner */
+.deposit-section { padding: 0 0 40px; }
+.deposit-wrap { display: flex; justify-content: center; }
+.deposit-wrap .promo-card { max-width: 440px; width: 100%; }
+
 .modal {
   display: none;
   position: fixed;
