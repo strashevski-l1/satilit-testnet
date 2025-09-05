@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeFAQ();
     initializeAnimations();
     initializeSlotInteractions();
+    initializeDepositWidget();
 });
 
 function initializeNavigation() {
@@ -261,6 +262,46 @@ function initializeAnimations() {
             counterObserver.observe(counter);
         }
     });
+}
+
+function initializeDepositWidget() {
+    const widget = document.getElementById('depositWidget');
+    if (!widget) return;
+    const amountInput = document.getElementById('depositAmount');
+    const minus = widget.querySelector('.amount-minus');
+    const plus = widget.querySelector('.amount-plus');
+    const plan = document.getElementById('bonusPlan');
+    const btn = document.getElementById('getBonusBtn');
+
+    function updateBtn() {
+        const amount = Math.max(parseFloat(amountInput.value || '0'), parseFloat(amountInput.min || '0'));
+        const percent = parseFloat(plan.value || '0');
+        const bonus = Math.round((amount * (percent / 100)) * 100) / 100;
+        const currency = (document.getElementById('currency')?.value || 'EUR');
+        const symbol = currency === 'USD' ? '$' : currency === 'AUD' ? 'A$' : '€';
+        btn.textContent = `Get ${symbol}${bonus.toFixed(2)}`;
+    }
+
+    minus?.addEventListener('click', () => {
+        const step = parseFloat(amountInput.step || '10');
+        const min = parseFloat(amountInput.min || '10');
+        amountInput.value = Math.max(min, parseFloat(amountInput.value || '0') - step);
+        updateBtn();
+    });
+    plus?.addEventListener('click', () => {
+        const step = parseFloat(amountInput.step || '10');
+        amountInput.value = (parseFloat(amountInput.value || '0') + step).toString();
+        updateBtn();
+    });
+    amountInput?.addEventListener('input', updateBtn);
+    plan?.addEventListener('change', updateBtn);
+    document.getElementById('currency')?.addEventListener('change', updateBtn);
+
+    btn?.addEventListener('click', () => {
+        document.getElementById('registerBtn')?.click();
+    });
+
+    updateBtn();
 }
 
 function initializeSlotInteractions() {

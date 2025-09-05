@@ -187,19 +187,65 @@ function showSiteContent() {
     </header>
 
     <main>
-      <section id="home" class="hero">
-        <div class="hero-content">
-          <h1 class="hero-title">BeonBet Online Casino</h1>
-          <p class="hero-subtitle">Play real money slots, classic table games, and immersive live dealer titles. Claim your welcome bonus and enjoy a secure mobile casino adventure.</p>
-          <div class="hero-buttons">
-            <a href="#bonuses" class="btn btn-primary btn-large">Get Welcome Bonus</a>
-            <button class="btn btn-outline btn-large" id="startPlayingBtn">Start Playing</button>
+      <section id="home" class="hero hero-banner">
+        <div class="hero-bg-image" aria-hidden="true"></div>
+        <div class="container hero-grid">
+          <div class="promo-card" role="region" aria-label="Welcome bonus widget">
+            <div class="promo-head">
+              <img class="promo-logo" src="assets/logo-CAVS3gze.webp" alt="BeonBet" />
+              <div>
+                <h1 class="promo-title">Welcome Pack</h1>
+                <p class="promo-sub">400% up to €2,150 + 300 FS</p>
+              </div>
+            </div>
+            <form id="depositWidget" class="promo-form">
+              <label class="form-label">Deposit Amount</label>
+              <div class="amount-row">
+                <button type="button" class="amount-btn amount-minus" aria-label="Decrease">−</button>
+                <input type="number" id="depositAmount" value="50" min="10" step="10" aria-label="Amount" />
+                <button type="button" class="amount-btn amount-plus" aria-label="Increase">+</button>
+              </div>
+              <div class="select-row">
+                <select id="country" aria-label="Country">
+                  <option value="EU" selected>Europe</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Canada">Canada</option>
+                </select>
+                <select id="currency" aria-label="Currency">
+                  <option value="EUR" selected>EUR</option>
+                  <option value="USD">USD</option>
+                  <option value="AUD">AUD</option>
+                </select>
+              </div>
+              <div class="bonus-row">
+                <div class="bonus-label">Choose your bonus <a href="#" class="tnc">T&C</a></div>
+                <select id="bonusPlan" aria-label="Bonus plan">
+                  <option value="400" selected>Welcome Pack 400%</option>
+                  <option value="150">Casino Welcome 1st Deposit 150%</option>
+                  <option value="100">Sports First Bet 100%</option>
+                </select>
+              </div>
+              <button id="getBonusBtn" class="btn btn-primary btn-full" type="button">Get €200.00</button>
+              <div class="hero-ctas">
+                <a href="#bonuses" class="btn btn-outline btn-full">View promotions</a>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="hero-bg">
-          <div class="floating-card card-1"></div>
-          <div class="floating-card card-2"></div>
-          <div class="floating-card card-3"></div>
+      </section>
+
+      <section class="banner-tiles">
+        <div class="container tiles-grid">
+          <div class="tile-card">
+            <h3>CASINO</h3>
+            <p>We offer a vast selection of exciting casino games, including classic slots, video slots, table games, and live dealer games.</p>
+            <button class="btn btn-outline">Play now</button>
+          </div>
+          <div class="tile-card">
+            <h3>SPORT BETTING</h3>
+            <p>Bet on your favorite sports from around the world. Enjoy attractive promotions like free bets and cashback offers.</p>
+            <button class="btn btn-outline">Make bets</button>
+          </div>
         </div>
       </section>
 
