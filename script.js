@@ -61,9 +61,10 @@ function initializeModals() {
         }, 300);
     }
     
-    loginBtn?.addEventListener('click', () => showModal(loginModal));
-    registerBtn?.addEventListener('click', () => showModal(registerModal));
-    startPlayingBtn?.addEventListener('click', () => showModal(registerModal));
+    // Navigate to internal pages instead of modals
+    loginBtn?.addEventListener('click', () => { location.hash = '#/login'; });
+    registerBtn?.addEventListener('click', () => { location.hash = '#/register'; });
+    startPlayingBtn?.addEventListener('click', () => { location.hash = '#/register'; });
     
     switchToRegister?.addEventListener('click', (e) => {
         e.preventDefault();
@@ -258,9 +259,7 @@ function initializeDepositWidget() {
     plan?.addEventListener('change', updateBtn);
     document.getElementById('currency')?.addEventListener('change', updateBtn);
 
-    btn?.addEventListener('click', () => {
-        document.getElementById('registerBtn')?.click();
-    });
+    btn?.addEventListener('click', () => { location.hash = '#/register'; });
 
     updateBtn();
 }
