@@ -165,6 +165,83 @@ function showSiteContent() {
   // External referral URL for logo and banner clicks
   const REF_URL = 'https://beonbet.com'; // adjust to your referral link if needed
 
+  // i18n setup
+  const REGION_TO_LANG = { DE: 'DE', AT: 'DE', CH: 'DE', IT: 'IT', AU: 'EN', CA: 'EN', GR: 'GR', PT: 'PT', NO: 'NO', FI: 'FI', DK: 'DK' };
+  const SUPPORTED = ['EN','DE','IT','GR','PT','NO','FI','DK'];
+  function getInitialLocale() {
+    const saved = localStorage.getItem('locale');
+    if (saved && (SUPPORTED.includes(saved) || Object.keys(REGION_TO_LANG).includes(saved))) return saved;
+    return 'EN';
+  }
+  let LOCALE = getInitialLocale();
+
+  // Minimal translation map (UI chrome + headings/labels). Body paragraphs remain EN fallback unless extended.
+  const I18N = {
+    EN: {
+      navHome: 'Home', navBonuses: 'Bonuses', login: 'Login', register: 'Register',
+      bannerNote: 'Welcome Pack — 400% up to €2,150 + 300 FS',
+      depositAmount: 'Deposit Amount', chooseBonus: 'Choose your bonus', terms: 'T&C', getPrefix: 'Get',
+      heroTitle: 'Welcome Pack', heroSub: '400% up to €2,150 + 300 FS',
+      metaHomeTitle: 'BeonBet — Welcome Bonus', metaHomeDesc: 'Play at BeonBet. Claim your welcome pack and start today. Lightweight landing with banner only.',
+      metaBonusesTitle: 'BeonBet — Bonuses', metaBonusesDesc: 'BeonBet Bonuses and Promotions: welcome pack, reloads, cashback.',
+      faqTitle: 'Frequently Asked Questions',
+      faq: [
+        ['Is BeonBet a licensed and safe online casino?','Yes, absolutely. BeonBet is a fully licensed casino, regulated by Curacao eGaming. We employ advanced security measures, including SSL encryption, to ensure your data and transactions are always secure, making us a trusted casino.'],
+        ['What types of games can I play at BeonBet?','We offer a vast array of casino games, including hundreds of online slots, classic table games like Blackjack, Roulette, and Baccarat, immersive Live dealer games, progressive jackpots, and unique specialty games like scratch cards.'],
+        ['Does BeonBet offer welcome bonuses?','Yes! New players at BeonBet are greeted with a generous welcome bonus package, often including a significant match bonus and free spins. Be sure to check our "Promotions" page for the latest offers.'],
+        ['Can I play BeonBet casino games on my mobile device?','Definitely. Our mobile casino is fully optimized for iOS and Android devices, allowing you to enjoy most of our casino games directly through your mobile browser without any downloads.'],
+        ['How do I register and log in to my BeonBet account?','You can easily complete your casino registration by clicking the "Sign Up" button on our homepage. Once registered, simply use your credentials for your BeonBet login to access your account and start playing.']
+      ],
+      joinNow: 'Join BeonBet Now!', beonbetLogin: 'BeonBet Login',
+      bonusesH1: 'Bonuses & Promotions', bonusesIntro: 'Explore BeonBet welcome package and ongoing offers designed to maximize your playtime.',
+      bonusTableHead: ['Bonus','Details','Benefits'],
+      bonusRows: [
+        ['Welcome Pack','Up to 400% match bonus + 300 free spins on first deposits','Big boost for new players'],
+        ['Reload Offers','Weekly deposit matches for active players','More balance, more play'],
+        ['Cashback','Percentage of net losses returned','Softer variance']
+      ],
+      getBonus: 'Get Bonus'
+    },
+    DE: {
+      navHome: 'Start', navBonuses: 'Boni', login: 'Anmelden', register: 'Registrieren',
+      bannerNote: 'Willkommenspaket — 400% bis zu 2.150 € + 300 FS',
+      depositAmount: 'Einzahlungsbetrag', chooseBonus: 'Bonus wählen', terms: 'AGB', getPrefix: 'Erhalte',
+      heroTitle: 'Willkommenspaket', heroSub: '400% bis zu 2.150 € + 300 FS',
+      faqTitle: 'Häufige Fragen',
+      joinNow: 'Jetzt BeonBet beitreten!', beonbetLogin: 'BeonBet Login',
+      bonusesH1: 'Boni & Aktionen', bonusesIntro: 'Entdecke Willkommenspakete und laufende Angebote.',
+      bonusTableHead: ['Bonus','Details','Vorteile'],
+      bonusRows: [
+        ['Willkommenspaket','Bis zu 400% + 300 Freispiele','Großer Startvorteil'],
+        ['Reload-Angebote','Wöchentliche Einzahlungsboni','Mehr Guthaben, mehr Spiel'],
+        ['Cashback','Prozentsatz der Nettverluste zurück','Sanftere Varianz']
+      ],
+      getBonus: 'Bonus erhalten'
+    },
+    IT: { navHome: 'Home', navBonuses: 'Bonus', login: 'Accedi', register: 'Registrati', bannerNote: 'Pacchetto benvenuto — 400% fino a €2.150 + 300 FS', depositAmount: 'Importo deposito', chooseBonus: 'Scegli il bonus', terms: 'T&C', getPrefix: 'Ottieni', heroTitle: 'Pacchetto benvenuto', heroSub: '400% fino a €2.150 + 300 FS', faqTitle: 'Domande frequenti', joinNow: 'Unisciti a BeonBet ora!', beonbetLogin: 'Accesso BeonBet', bonusesH1: 'Bonus e Promozioni', bonusesIntro: 'Scopri i pacchetti e le offerte in corso.', bonusTableHead: ['Bonus','Dettagli','Vantaggi'], bonusRows: [['Pacchetto benvenuto','Fino al 400% + 300 giri gratuiti','Grande spinta iniziale'],['Ricariche','Bonus settimanali sui depositi','Più saldo, più gioco'],['Cashback','Percentuale di perdite nette restituita','Varianza più morbida']], getBonus: 'Ottieni Bonus' },
+    GR: { navHome: 'Αρχική', navBonuses: 'Μπόνους', login: 'Σύνδεση', register: 'Εγγραφή', bannerNote: 'Πακέτο καλωσορίσματος — 400% έως €2.150 + 300 FS', depositAmount: 'Ποσό κατάθεσης', chooseBonus: 'Επιλέξτε μπόνους', terms: 'Όροι', getPrefix: 'Λάβετε', heroTitle: 'Πακέτο καλωσορίσματος', heroSub: '400% έως €2.150 + 300 FS', faqTitle: 'Συχνές ερωτήσεις', joinNow: 'Γίνε μέλος τώρα!', beonbetLogin: 'Σύνδεση BeonBet', bonusesH1: 'Μπόνους & Προσφορές', bonusesIntro: 'Εξερευνήστε το πακέτο καλωσορίσματος και προσφορές.', bonusTableHead: ['Μπόνους','Λεπτομέρειες','Οφέλη'], bonusRows: [['Πακέτο καλωσορίσματος','Έως 400% + 300 δωρεάν περιστροφές','Μεγάλη αρχική ώθηση'],['Επαναφορτώσεις','Εβδομαδιαία μπόνους καταθέσεων','Περισσότερο υπόλοιπο, περισσότερο παιχνίδι'],['Cashback','Ποσοστό επιστροφής ζημιών','Ήπια διακύμανση']], getBonus: 'Λήψη Μπόνους' },
+    PT: { navHome: 'Início', navBonuses: 'Bónus', login: 'Entrar', register: 'Registar', bannerNote: 'Pacote de boas-vindas — 400% até €2.150 + 300 FS', depositAmount: 'Montante do depósito', chooseBonus: 'Escolher bónus', terms: 'T&C', getPrefix: 'Obter', heroTitle: 'Pacote de boas-vindas', heroSub: '400% até €2.150 + 300 FS', faqTitle: 'Perguntas frequentes', joinNow: 'Junte-se à BeonBet agora!', beonbetLogin: 'Login BeonBet', bonusesH1: 'Bónus e Promoções', bonusesIntro: 'Explore os pacotes e ofertas.', bonusTableHead: ['Bónus','Detalhes','Vantagens'], bonusRows: [['Pacote de boas-vindas','Até 400% + 300 rodadas grátis','Grande impulso inicial'],['Ofertas de recarga','Bónus semanais de depósito','Mais saldo, mais jogo'],['Cashback','Percentagem das perdas devolvida','Menor variância']], getBonus: 'Obter Bónus' },
+    NO: { navHome: 'Hjem', navBonuses: 'Bonuser', login: 'Logg inn', register: 'Registrer', bannerNote: 'Velkomstpakke — 400% opptil €2.150 + 300 FS', depositAmount: 'Innskuddsbeløp', chooseBonus: 'Velg bonus', terms: 'Vilkår', getPrefix: 'Få', heroTitle: 'Velkomstpakke', heroSub: '400% opptil €2.150 + 300 FS', faqTitle: 'Ofte stilte spørsmål', joinNow: 'Bli med nå!', beonbetLogin: 'BeonBet Innlogging', bonusesH1: 'Bonuser og kampanjer', bonusesIntro: 'Utforsk pakker og tilbud.', bonusTableHead: ['Bonus','Detaljer','Fordeler'], bonusRows: [['Velkomstpakke','Opptil 400% + 300 gratisspinn','Stor startfordel'],['Påfyllstilbud','Ukentlige innskuddsbonuser','Mer saldo, mer spill'],['Cashback','Prosent av netto tap tilbake','Mykere varians']], getBonus: 'Få Bonus' },
+    FI: { navHome: 'Koti', navBonuses: 'Bonukset', login: 'Kirjaudu', register: 'Rekisteröidy', bannerNote: 'Tervetuliaispaketti — 400% jopa €2 150 + 300 FS', depositAmount: 'Talletussumma', chooseBonus: 'Valitse bonus', terms: 'Ehdot', getPrefix: 'Hanki', heroTitle: 'Tervetuliaispaketti', heroSub: '400% jopa €2 150 + 300 FS', faqTitle: 'Usein kysytyt kysymykset', joinNow: 'Liity nyt!', beonbetLogin: 'BeonBet Kirjautuminen', bonusesH1: 'Bonukset ja kampanjat', bonusesIntro: 'Tutustu tarjouksiin.', bonusTableHead: ['Bonus','Tiedot','Hyödyt'], bonusRows: [['Tervetuliaispaketti','Jopa 400% + 300 ilmaiskierrosta','Suuri aloitusetu'],['Latausbonukset','Viikoittaiset talletusbonukset','Enemmän saldoa, enemmän peliä'],['Cashback','Osa nettotappioista takaisin','Pehmeämpi varianssi']], getBonus: 'Hanki Bonus' },
+    DK: { navHome: 'Hjem', navBonuses: 'Bonusser', login: 'Log ind', register: 'Registrér', bannerNote: 'Velkomstpakke — 400% op til €2.150 + 300 FS', depositAmount: 'Indbetalingsbeløb', chooseBonus: 'Vælg bonus', terms: 'Vilkår', getPrefix: 'Få', heroTitle: 'Velkomstpakke', heroSub: '400% op til €2.150 + 300 FS', faqTitle: 'Ofte stillede spørgsmål', joinNow: 'Deltag nu!', beonbetLogin: 'BeonBet Login', bonusesH1: 'Bonusser & Kampagner', bonusesIntro: 'Udforsk pakker og tilbud.', bonusTableHead: ['Bonus','Detaljer','Fordele'], bonusRows: [['Velkomstpakke','Op til 400% + 300 free spins','Stor startfordel'],['Reload-tilbud','Ugentlige indbetalingsbonusser','Mere saldo, mere spil'],['Cashback','Procentdel af nettotab tilbage','Blødere varians']], getBonus: 'Få Bonus' }
+  };
+
+  function t(key) {
+    const lang = REGION_TO_LANG[LOCALE] || LOCALE;
+    const dict = I18N[lang] || I18N.EN;
+    return dict[key] ?? I18N.EN[key] ?? key;
+  }
+
+  function chooseBannerPaths() {
+    // Map locale/region to banner folder (DE/IT/EN mappings only available in repo; others fallback to EN)
+    const lang = REGION_TO_LANG[LOCALE] || LOCALE;
+    const folder = ['DE','IT'].includes(lang) ? lang : 'EN';
+    return {
+      desktop: `BeOnBet banners/${folder}/${folder} 728x90 Welcome bonus.png`,
+      mobile: `BeOnBet banners/${folder}/${folder} 300x250 Welcome bonus.png`
+    };
+  }
+
   container.innerHTML = `
     <header class="header">
       <div class="nav-container">
@@ -174,12 +251,31 @@ function showSiteContent() {
           </a>
         </div>
         <ul class="nav-menu">
-          <li><a class="nav-link" href="#/">Home</a></li>
-          <li><a class="nav-link" href="#/bonuses">Bonuses</a></li>
+          <li><a class="nav-link" href="#/">${t('navHome')}</a></li>
+          <li><a class="nav-link" href="#/bonuses">${t('navBonuses')}</a></li>
         </ul>
         <div class="auth-buttons">
-          <button class="btn btn-outline" id="loginBtn">Login</button>
-          <button class="btn btn-primary" id="registerBtn">Register</button>
+          <button class="btn btn-outline" id="loginBtn">${t('login')}</button>
+          <button class="btn btn-primary" id="registerBtn">${t('register')}</button>
+          <div class="lang-switcher" id="langSwitcher">
+            <button class="lang-btn" id="langBtn">${REGION_TO_LANG[LOCALE] || LOCALE}</button>
+            <div class="lang-menu" id="langMenu" aria-label="Language menu">
+              <ul>
+                <li data-locale="EN">EN — English</li>
+                <li data-locale="DE">DE — Deutsch</li>
+                <li data-locale="AT">AT — Deutsch (Austria)</li>
+                <li data-locale="CH">CH — Deutsch (Switzerland)</li>
+                <li data-locale="IT">IT — Italiano</li>
+                <li data-locale="AU">AU — English (Australia)</li>
+                <li data-locale="CA">CA — English (Canada)</li>
+                <li data-locale="GR">GR — Ελληνικά</li>
+                <li data-locale="PT">PT — Português</li>
+                <li data-locale="NO">NO — Norsk</li>
+                <li data-locale="FI">FI — Suomi</li>
+                <li data-locale="DK">DK — Dansk</li>
+              </ul>
+            </div>
+          </div>
           <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
             <span></span>
             <span></span>
@@ -279,15 +375,16 @@ function showSiteContent() {
   function renderHome() {
     const root = document.getElementById('view-root');
     if (!root) return;
+    const banners = chooseBannerPaths();
     root.innerHTML = `
       <section class="banner-hero">
         <div class="container">
           <div class="banner-wrap">
             <a href="${REF_URL}" target="_blank" rel="noopener noreferrer" class="banner-link">
-              <img class="banner-img banner-desktop" src="BeOnBet banners/EN/EN 728x90 Welcome bonus.png" alt="BeonBet Welcome Bonus 728x90" />
-              <img class="banner-img banner-mobile" src="BeOnBet banners/EN/EN 300x250 Welcome bonus.png" alt="BeonBet Welcome Bonus 300x250" />
+              <img class="banner-img banner-desktop" src="${banners.desktop}" alt="BeonBet Welcome Bonus 728x90" />
+              <img class="banner-img banner-mobile" src="${banners.mobile}" alt="BeonBet Welcome Bonus 300x250" />
             </a>
-            <p class="banner-note">Welcome Pack — 400% up to €2,150 + 300 FS</p>
+            <p class="banner-note">${t('bannerNote')}</p>
           </div>
         </div>
       </section>
@@ -298,12 +395,12 @@ function showSiteContent() {
             <div class="promo-head">
               <img class="promo-logo" src="assets/logo-CAVS3gze.webp" alt="BeonBet" />
               <div>
-                <h1 class="promo-title">Welcome Pack</h1>
-                <p class="promo-sub">400% up to €2,150 + 300 FS</p>
+                <h1 class="promo-title">${t('heroTitle')}</h1>
+                <p class="promo-sub">${t('heroSub')}</p>
               </div>
             </div>
             <form id="depositWidget" class="promo-form">
-              <label class="form-label">Deposit Amount</label>
+              <label class="form-label">${t('depositAmount')}</label>
               <div class="amount-row">
                 <button type="button" class="amount-btn amount-minus" aria-label="Decrease">−</button>
                 <input type="number" id="depositAmount" value="50" min="10" step="10" aria-label="Amount" />
@@ -322,14 +419,14 @@ function showSiteContent() {
                 </select>
               </div>
               <div class="bonus-row">
-                <div class="bonus-label">Choose your bonus <a href="#" class="tnc">T&C</a></div>
+                <div class="bonus-label">${t('chooseBonus')} <a href="#" class="tnc">${t('terms')}</a></div>
                 <select id="bonusPlan" aria-label="Bonus plan">
                   <option value="400" selected>Welcome Pack 400%</option>
                   <option value="150">Casino Welcome 1st Deposit 150%</option>
                   <option value="100">Sports First Bet 100%</option>
                 </select>
               </div>
-              <button id="getBonusBtn" class="btn btn-primary btn-full" type="button">Get €200.00</button>
+              <button id="getBonusBtn" class="btn btn-primary btn-full" type="button">${t('getPrefix')} €200.00</button>
             </form>
           </div>
         </div>
@@ -420,62 +517,25 @@ function showSiteContent() {
 
       <section id="faq" class="faq">
         <div class="container">
-          <h2 class="section-title">Frequently Asked Questions</h2>
+          <h2 class="section-title">${t('faqTitle')}</h2>
           <div class="faq-list">
-            <div class="faq-item">
-              <div class="faq-question">
-                <h3>Is BeonBet a licensed and safe online casino?</h3>
-                <div class="faq-icon">+</div>
+            ${I18N[(REGION_TO_LANG[LOCALE]||LOCALE)]?.faq?.map(([q,a]) => `
+              <div class="faq-item">
+                <div class="faq-question">
+                  <h3>${q}</h3>
+                  <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer"><div>
+                  <p>${a}</p>
+                </div></div>
               </div>
-              <div class="faq-answer"><div>
-                <p>Yes, absolutely. BeonBet is a fully licensed casino, regulated by Curacao eGaming. We employ advanced security measures, including SSL encryption, to ensure your data and transactions are always secure, making us a trusted casino.</p>
-              </div></div>
-            </div>
-            <div class="faq-item">
-              <div class="faq-question">
-                <h3>What types of games can I play at BeonBet?</h3>
-                <div class="faq-icon">+</div>
-              </div>
-              <div class="faq-answer"><div>
-                <p>We offer a vast array of casino games, including hundreds of online slots, classic table games like Blackjack, Roulette, and Baccarat, immersive Live dealer games, progressive jackpots, and unique specialty games like scratch cards.</p>
-              </div></div>
-            </div>
-            <div class="faq-item">
-              <div class="faq-question">
-                <h3>Does BeonBet offer welcome bonuses?</h3>
-                <div class="faq-icon">+</div>
-              </div>
-              <div class="faq-answer"><div>
-                <p>Yes! New players at BeonBet are greeted with a generous welcome bonus package, often including a significant match bonus and free spins. Be sure to check our "Promotions" page for the latest offers.</p>
-              </div></div>
-            </div>
-            <div class="faq-item">
-              <div class="faq-question">
-                <h3>Can I play BeonBet casino games on my mobile device?</h3>
-                <div class="faq-icon">+</div>
-              </div>
-              <div class="faq-answer"><div>
-                <p>Definitely. Our mobile casino is fully optimized for iOS and Android devices, allowing you to enjoy most of our casino games directly through your mobile browser without any downloads.</p>
-              </div></div>
-            </div>
-            <div class="faq-item">
-              <div class="faq-question">
-                <h3>How do I register and log in to my BeonBet account?</h3>
-                <div class="faq-icon">+</div>
-              </div>
-              <div class="faq-answer"><div>
-                <p>You can easily complete your casino registration by clicking the "Sign Up" button on our homepage. Once registered, simply use your credentials for your BeonBet login to access your account and start playing.</p>
-              </div></div>
-            </div>
+            `).join('')}
           </div>
         </div>
       </section>
     `;
 
-    setMeta(
-      'BeonBet — Welcome Bonus',
-      'Play at BeonBet. Claim your welcome pack and start today. Lightweight landing with banner only.'
-    );
+    setMeta(t('metaHomeTitle') || 'BeonBet — Welcome Bonus', t('metaHomeDesc') || 'Play at BeonBet. Claim your welcome pack and start today. Lightweight landing with banner only.');
 
     // Wire CTAs to modals (if present)
     document.getElementById('registerCta')?.addEventListener('click', () => document.getElementById('registerBtn')?.click());
@@ -489,6 +549,9 @@ function showSiteContent() {
 
     // Ensure FAQ JSON-LD present (no duplicates)
     ensureFaqJsonLd();
+
+    // Bind language switcher
+    bindLangSwitcher();
   }
 
   function renderBonuses() {
@@ -497,43 +560,31 @@ function showSiteContent() {
     root.innerHTML = `
       <section class="content">
         <div class="container">
-          <h1>Bonuses & Promotions</h1>
-          <p class="meta-desc">Explore BeonBet welcome package and ongoing offers designed to maximize your playtime.</p>
+          <h1>${t('bonusesH1')}</h1>
+          <p class="meta-desc">${t('bonusesIntro')}</p>
           <div class="table-wrapper">
             <table>
               <thead>
                 <tr><th>Bonus</th><th>Details</th><th>Benefits</th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Welcome Pack</td>
-                  <td>Up to 400% match bonus + 300 free spins on first deposits</td>
-                  <td>Big boost for new players</td>
-                </tr>
-                <tr>
-                  <td>Reload Offers</td>
-                  <td>Weekly deposit matches for active players</td>
-                  <td>More balance, more play</td>
-                </tr>
-                <tr>
-                  <td>Cashback</td>
-                  <td>Percentage of net losses returned</td>
-                  <td>Softer variance</td>
-                </tr>
+                ${ (I18N[(REGION_TO_LANG[LOCALE]||LOCALE)]?.bonusRows || I18N.EN.bonusRows).map(([b,d,ben]) => `
+                  <tr><td>${b}</td><td>${d}</td><td>${ben}</td></tr>
+                `).join('') }
               </tbody>
             </table>
           </div>
           <p>
-            <a href="${REF_URL}" target="_blank" rel="noopener" class="btn btn-primary">Get Bonus</a>
+            <a href="${REF_URL}" target="_blank" rel="noopener" class="btn btn-primary">${t('getBonus')}</a>
           </p>
         </div>
       </section>
     `;
 
-    setMeta(
-      'BeonBet — Bonuses',
-      'BeonBet Bonuses and Promotions: welcome pack, reloads, cashback.'
-    );
+    setMeta(t('metaBonusesTitle') || 'BeonBet — Bonuses', t('metaBonusesDesc') || 'BeonBet Bonuses and Promotions: welcome pack, reloads, cashback.');
+
+    // Bind language switcher
+    bindLangSwitcher();
   }
 
   function ensureFaqJsonLd() {
@@ -604,4 +655,25 @@ function showSiteContent() {
 
   window.addEventListener('hashchange', router);
   router();
+
+  function bindLangSwitcher() {
+    const btn = document.getElementById('langBtn');
+    const menu = document.getElementById('langMenu');
+    const switcher = document.getElementById('langSwitcher');
+    if (!btn || !menu || !switcher) return;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('active');
+    });
+    menu.querySelectorAll('li').forEach(li => {
+      li.addEventListener('click', (e) => {
+        const locale = li.getAttribute('data-locale');
+        localStorage.setItem('locale', locale);
+        // Reload whole app to re-render with new locale
+        location.reload();
+      });
+    });
+    document.addEventListener('click', () => menu.classList.remove('active'));
+  }
 }
